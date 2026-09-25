@@ -1,0 +1,71 @@
+{
+  "source_base_commit": "581f86624ab31806a1705e7f0d053b503c503e9f",
+  "scope": "Local working tree deployment, including uncommitted changes; source base commit alone does not identify these edits. Exact model and runtime configurations are embedded in each resolved.json.",
+  "model_version": "tiny-char-trained-v1",
+  "source_files": [
+    {
+      "name": "benchmarks/tiny_llm.cc",
+      "bytes": 5509
+    },
+    {
+      "name": "scripts/llm_model.py",
+      "bytes": 5938
+    },
+    {
+      "name": "scripts/verify_llm.py",
+      "bytes": 8334
+    },
+    {
+      "name": "scripts/check_llm_negative.py",
+      "bytes": 3484
+    },
+    {
+      "name": "scripts/train_tiny_llm.py",
+      "bytes": 5983
+    },
+    {
+      "name": "scripts/configure.py",
+      "bytes": 5681
+    },
+    {
+      "name": "scripts/run.py",
+      "bytes": 3989
+    },
+    {
+      "name": "scripts/test.py",
+      "bytes": 8272
+    },
+    {
+      "name": "scripts/build_device.sh",
+      "bytes": 2141
+    },
+    {
+      "name": "integration/coralnpu/BUILD.bazel",
+      "bytes": 919
+    },
+    {
+      "name": "config/llm/tiny_char_v1.json",
+      "bytes": 32684
+    },
+    {
+      "name": "config/llm/training.json",
+      "bytes": 181
+    },
+    {
+      "name": "config/llm/corpus.txt",
+      "bytes": 113
+    },
+    {
+      "name": "config/benchmarks/tiny_llm.json",
+      "bytes": 133
+    },
+    {
+      "name": "config/benchmarks/tiny_llm_no_cache.json",
+      "bytes": 134
+    },
+    {
+      "name": "config/benchmarks/tiny_llm_long.json",
+      "bytes": 136
+    }
+  ]
+}

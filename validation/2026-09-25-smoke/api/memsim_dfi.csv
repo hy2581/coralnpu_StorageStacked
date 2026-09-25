@@ -1,0 +1,8 @@
+cycle,phase,kind,request_id,command,bus,beat,beat_count,beat_bytes,stack_id,channel,pseudo_channel,sid,rank,bank_group,bank,row,column,address,system_address,issued_cycle,payload_source,payload_initialized,payload_init_mask
+17,1,COMMAND,1,ACT,Row,0,0,0,0,0,0,0,0,0,0,0,0,0x3,0x3,17,none,1,
+49,1,COMMAND,1,WR,Column,0,0,0,0,0,0,0,0,0,0,0,0,0x3,0x3,49,none,1,
+71,1,WRITE_DATA,1,WR,Column,0,1,8,0,0,0,0,0,0,0,0,0,0x3,0x3,49,request_payload,1,ffffffffffffffff
+71,1,COMMAND,2,WR,Column,0,0,0,0,0,0,0,0,0,0,0,1,0x23,0x23,71,none,1,
+93,1,WRITE_DATA,2,WR,Column,0,1,8,0,0,0,0,0,0,0,0,1,0x23,0x23,71,request_payload,1,ffffffffffffffff
+121,1,COMMAND,3,RD,Column,0,0,0,0,0,0,0,0,0,0,0,0,0x3,0x3,121,none,1,
+187,1,READ_DATA,3,RD,Column,0,1,8,0,0,0,0,0,0,0,0,0,0x3,0x3,121,memory_image,1,ffffffffffffffff

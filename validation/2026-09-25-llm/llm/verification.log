@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "axi_data_bits": 256,
+  "transactions": 7111,
+  "axi_handshakes": 16470,
+  "max_request_latency_ns": 326.0,
+  "coverage": {
+    "narrow_bursts": 7111,
+    "full_width_bursts": 0,
+    "bursts_256_beats": 0,
+    "masked_write_beats": 2248,
+    "aw_before_w": 2248,
+    "w_before_aw": 0,
+    "error_responses": 0,
+    "checked_read_bytes": 77808
+  }
+}
+{
+  "passed": true,
+  "master_data_bits": 256,
+  "wide_handshakes": 16470,
+  "wide_vcd_data_beats": 7111,
+  "width": 256,
+  "planes": 2,
+  "memory_completed": 7111,
+  "memory_errors": 0,
+  "target_reads": 4863,
+  "target_writes": 2248,
+  "target_read_beats": 4863,
+  "target_write_beats": 2248,
+  "tx_flits": 16475,
+  "rx_flits": 28448,
+  "forward_replays": 0,
+  "reverse_replays": 0,
+  "crc_errors": 0,
+  "order_violations": 0
+}
+llm UCIe/AXI trace PASS {'passed': True, 'records': 179692, 'events': {'TX_FDI': 44923, 'TX_FRAME': 44923, 'RX_FRAME': 44923, 'RX_FDI': 44923}, 'rx_status': {'in_order': 44923}, 'fdi_delivered': 44923, 'fdi_in_flight_at_exit': 0, 'axi_handshakes': 16470, 'business_messages': 16470}
+{
+  "passed": true,
+  "bursts": 7111,
+  "children": 7111,
+  "errors": 0,
+  "image_bytes": 8832,
+  "window_bytes": 805306368,
+  "period_fs": 250000,
+  "commands": {
+    "REFpb": 21016,
+    "ACT": 329,
+    "WR": 2248,
+    "PREpb": 328,
+    "RD": 4863
+  },
+  "dfi_data_events": 7111,
+  "submit_stalls": 0,
+  "response_stalls": 0
+}
+llm PASS 16470 handshakes
+{
+  "passed": true,
+  "device": "coralnpu",
+  "sources": {
+    "coralnpu": {
+      "transactions": 7111,
+      "bytes": 113776,
+      "roundtrip_mean_ns": 56.630572352693015
+    }
+  },
+  "devices": {
+    "cycles": 320502,
+    "prompt_tokens": 4,
+    "generated_tokens": 3,
+    "mailbox": 1611464704
+  }
+}
+Trace viewer: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-llm-v1/llm/trace_view.html
+Generated /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-llm-v1/llm/memsim_view.html

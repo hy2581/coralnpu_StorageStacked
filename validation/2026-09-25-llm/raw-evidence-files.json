@@ -1,0 +1,1999 @@
+{
+  "raw_results": "results/acceptance-llm-v1",
+  "model_version": "tiny-char-trained-v1",
+  "cases": {
+    "default": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 419
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 87631
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 225464
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 261
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 36485
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 37626
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 60002
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5887
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 775442
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 364
+        },
+        {
+          "name": "completion.json",
+          "bytes": 118
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1069
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 140381
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 293
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 80776
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 112
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 316
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 40469
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 147
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 98287
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 141860
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 4668
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 721424
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 7886
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 12720
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 38113
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 388
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 745
+        },
+        {
+          "name": "run.log",
+          "bytes": 345
+        },
+        {
+          "name": "summary.json",
+          "bytes": 3477
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 19213
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 19761
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 3940594
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 1972266
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 1968431
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 102
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1904
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 110,
+      "complete_directory_bytes": 16402663
+    },
+    "slow": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 419
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 88043
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 226110
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 261
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 36603
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 37904
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 60582
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 6023
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 1015136
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 365
+        },
+        {
+          "name": "completion.json",
+          "bytes": 119
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1069
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 141262
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 293
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 80803
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 113
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 317
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 22935
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 329
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 146
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 69148
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 101292
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 4662
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 722000
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 7879
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 12722
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 38205
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 388
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 745
+        },
+        {
+          "name": "run.log",
+          "bytes": 343
+        },
+        {
+          "name": "summary.json",
+          "bytes": 3475
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 19210
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 19945
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 3942126
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 1973030
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 1969199
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 99
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1895
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 110,
+      "complete_directory_bytes": 16565763
+    },
+    "replay": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 422
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 87677
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 225530
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 264
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 36499
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 37643
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 60062
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5887
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 781091
+        },
+        {
+          "name": "benchmark-build.log",
+          "bytes": 985
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 364
+        },
+        {
+          "name": "completion.json",
+          "bytes": 118
+        },
+        {
+          "name": "config.json",
+          "bytes": 213
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1069
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 140539
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 335
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 80796
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 112
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 316
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 40838
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 147
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 98899
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 142720
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 4668
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 721511
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 7885
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 12720
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 38124
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 388
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 744
+        },
+        {
+          "name": "run.log",
+          "bytes": 344
+        },
+        {
+          "name": "summary.json",
+          "bytes": 3475
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 20028
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 19783
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 4027196
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 2015710
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 2011589
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 101
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1934
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 112,
+      "complete_directory_bytes": 16696394
+    },
+    "backpressure": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 419
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 88049
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 226114
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 261
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 36603
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 37737
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 18624
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 60582
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 4187
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 724259
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 364
+        },
+        {
+          "name": "completion.json",
+          "bytes": 118
+        },
+        {
+          "name": "config.json",
+          "bytes": 213
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1069
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 141275
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 293
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 80976
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 115
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 321
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 51629
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 149
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 116745
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 167606
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 4670
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 722261
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 7900
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 12720
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 38206
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 391
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 744
+        },
+        {
+          "name": "run.log",
+          "bytes": 350
+        },
+        {
+          "name": "summary.json",
+          "bytes": 3493
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 19218
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 19947
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 3944300
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 1974112
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 1970291
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 107
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1928
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 110,
+      "complete_directory_bytes": 16413122
+    },
+    "alternate": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 423
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 354543
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 918452
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 263
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 147443
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 146871
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 250780
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5887
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 3179999
+        },
+        {
+          "name": "benchmark-build.log",
+          "bytes": 1014
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 367
+        },
+        {
+          "name": "completion.json",
+          "bytes": 119
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1069
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 579111
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 296
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 329688
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 114
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 323
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 167394
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 151
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 404573
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 578892
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 17695
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 2906219
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 7919
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 34917
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 154073
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 391
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 746
+        },
+        {
+          "name": "run.log",
+          "bytes": 348
+        },
+        {
+          "name": "summary.json",
+          "bytes": 3512
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 56907
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 81300
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 15807357
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 7911403
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 7896057
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 104
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1936
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 297,
+      "complete_directory_bytes": 65737806
+    },
+    "llm": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 430
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 2437934
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 6311276
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 269
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 1004177
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 1073742
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 1705047
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5908
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 28049816
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 371
+        },
+        {
+          "name": "completion.json",
+          "bytes": 121
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1062
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 4102010
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 305
+        },
+        {
+          "name": "llm_report.md",
+          "bytes": 985
+        },
+        {
+          "name": "llm_summary.json",
+          "bytes": 2641
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 2325714
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 114
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 328
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 1435893
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 154
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 3266300
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 4581231
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 75641
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 19748849
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 8004
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 216160
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 1061426
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 399
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 35917
+        },
+        {
+          "name": "run.log",
+          "bytes": 343
+        },
+        {
+          "name": "summary.json",
+          "bytes": 6447
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 347432
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 596813
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 107481522
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 53800671
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 53680954
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 98
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1958
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 1724,
+      "complete_directory_bytes": 454838445
+    },
+    "llm_slow": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 430
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 2439929
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 6314410
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 269
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 1004745
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 1075587
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 1707881
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5908
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 36310511
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 372
+        },
+        {
+          "name": "completion.json",
+          "bytes": 121
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1062
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 4106295
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 305
+        },
+        {
+          "name": "llm_report.md",
+          "bytes": 987
+        },
+        {
+          "name": "llm_summary.json",
+          "bytes": 2645
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 2316512
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 115
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 328
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 756483
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 329
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 153
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 2132600
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 3033262
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 75445
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 19737663
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 7991
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 216162
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 1061859
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 399
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 35917
+        },
+        {
+          "name": "run.log",
+          "bytes": 348
+        },
+        {
+          "name": "summary.json",
+          "bytes": 6465
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 347437
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 597679
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 107462516
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 53791171
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 53671448
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 103
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1978
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 1724,
+      "complete_directory_bytes": 459668594
+    },
+    "llm_replay": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 437
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 2438134
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 6311582
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 276
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 1004230
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 1073907
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 1705310
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5908
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 28239625
+        },
+        {
+          "name": "benchmark-build.log",
+          "bytes": 978
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 371
+        },
+        {
+          "name": "completion.json",
+          "bytes": 121
+        },
+        {
+          "name": "config.json",
+          "bytes": 213
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1062
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 4103801
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 349
+        },
+        {
+          "name": "llm_report.md",
+          "bytes": 985
+        },
+        {
+          "name": "llm_summary.json",
+          "bytes": 2641
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 2325901
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 114
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 328
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 1446887
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 154
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 3284437
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 4606018
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 75643
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 19749366
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 8003
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 216160
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 1061473
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 399
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 35916
+        },
+        {
+          "name": "run.log",
+          "bytes": 350
+        },
+        {
+          "name": "summary.json",
+          "bytes": 6467
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 364443
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 596907
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 109184689
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 54655708
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 54529084
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 105
+        },
+        {
+          "name": "verification.log",
+          "bytes": 2028
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 1747,
+      "complete_directory_bytes": 460677049
+    },
+    "llm_backpressure": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 430
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 2442192
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 6318024
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 269
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 1005422
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 1074847
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 18624
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 1711272
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 4140
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 28008516
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 371
+        },
+        {
+          "name": "completion.json",
+          "bytes": 121
+        },
+        {
+          "name": "config.json",
+          "bytes": 213
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1062
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 4111053
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 305
+        },
+        {
+          "name": "llm_report.md",
+          "bytes": 987
+        },
+        {
+          "name": "llm_summary.json",
+          "bytes": 2645
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 2329381
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 118
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 332
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 2016780
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 154
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 4221018
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 5885683
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 75674
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 19760130
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 8006
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 216160
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 1062310
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 404
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 35916
+        },
+        {
+          "name": "run.log",
+          "bytes": 356
+        },
+        {
+          "name": "summary.json",
+          "bytes": 6484
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 347445
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 598581
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 107518812
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 53819321
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 53699594
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 111
+        },
+        {
+          "name": "verification.log",
+          "bytes": 2013
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 1724,
+      "complete_directory_bytes": 457814300
+    },
+    "llm_no_cache": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 434
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 5374077
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 13899462
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 272
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 2202619
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 2376268
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 3731524
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5908
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 63515601
+        },
+        {
+          "name": "benchmark-build.log",
+          "bytes": 1051
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 374
+        },
+        {
+          "name": "completion.json",
+          "bytes": 122
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1062
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 9142295
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 305
+        },
+        {
+          "name": "llm_report.md",
+          "bytes": 990
+        },
+        {
+          "name": "llm_summary.json",
+          "bytes": 2664
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 5185576
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 116
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 332
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 3274897
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 156
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 7382387
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 10280305
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 75805
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 43301158
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 8026
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 478962
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 2340361
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 404
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 35918
+        },
+        {
+          "name": "run.log",
+          "bytes": 352
+        },
+        {
+          "name": "summary.json",
+          "bytes": 6507
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 754105
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 1354627
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 235657210
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 117967620
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 117689693
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 107
+        },
+        {
+          "name": "verification.log",
+          "bytes": 2005
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 3708,
+      "complete_directory_bytes": 999967962
+    },
+    "llm_long": {
+      "passed": true,
+      "files": [
+        {
+          "name": "aou_check_summary.json",
+          "bytes": 432
+        },
+        {
+          "name": "aou_events.csv",
+          "bytes": 3486171
+        },
+        {
+          "name": "aou_messages.csv",
+          "bytes": 9034868
+        },
+        {
+          "name": "aou_summary.json",
+          "bytes": 270
+        },
+        {
+          "name": "axi256_handshakes.csv",
+          "bytes": 1434074
+        },
+        {
+          "name": "axi_events.csv",
+          "bytes": 1543101
+        },
+        {
+          "name": "axi_first_200ns_cycles.csv",
+          "bytes": 28231
+        },
+        {
+          "name": "axi_flit_path.csv",
+          "bytes": 2417177
+        },
+        {
+          "name": "axi_overview.svg",
+          "bytes": 5908
+        },
+        {
+          "name": "axi_view.gtkw",
+          "bytes": 692
+        },
+        {
+          "name": "axi_wave.vcd",
+          "bytes": 41212125
+        },
+        {
+          "name": "benchmark-build.log",
+          "bytes": 1007
+        },
+        {
+          "name": "check_summary.json",
+          "bytes": 374
+        },
+        {
+          "name": "completion.json",
+          "bytes": 121
+        },
+        {
+          "name": "config.json",
+          "bytes": 214
+        },
+        {
+          "name": "environment.json",
+          "bytes": 1062
+        },
+        {
+          "name": "flit_pairs.csv",
+          "bytes": 5894822
+        },
+        {
+          "name": "link_check_summary.json",
+          "bytes": 305
+        },
+        {
+          "name": "llm_report.md",
+          "bytes": 988
+        },
+        {
+          "name": "llm_summary.json",
+          "bytes": 2672
+        },
+        {
+          "name": "memsim_bridge.csv",
+          "bytes": 3343960
+        },
+        {
+          "name": "memsim_bridge_summary.json",
+          "bytes": 116
+        },
+        {
+          "name": "memsim_check.json",
+          "bytes": 332
+        },
+        {
+          "name": "memsim_commands.csv",
+          "bytes": 2129482
+        },
+        {
+          "name": "memsim_config.json",
+          "bytes": 327
+        },
+        {
+          "name": "memsim_core.json",
+          "bytes": 156
+        },
+        {
+          "name": "memsim_dfi.csv",
+          "bytes": 4802318
+        },
+        {
+          "name": "memsim_dfi_signals.csv",
+          "bytes": 6706938
+        },
+        {
+          "name": "memsim_image.csv",
+          "bytes": 91274
+        },
+        {
+          "name": "memsim_journeys.json",
+          "bytes": 28235214
+        },
+        {
+          "name": "memsim_stats.txt",
+          "bytes": 8015
+        },
+        {
+          "name": "memsim_view.html",
+          "bytes": 309648
+        },
+        {
+          "name": "npu_requests.csv",
+          "bytes": 1517109
+        },
+        {
+          "name": "protocol_summary.json",
+          "bytes": 402
+        },
+        {
+          "name": "resolved.json",
+          "bytes": 35920
+        },
+        {
+          "name": "run.log",
+          "bytes": 348
+        },
+        {
+          "name": "summary.json",
+          "bytes": 6510
+        },
+        {
+          "name": "trace_view.html",
+          "bytes": 494764
+        },
+        {
+          "name": "transactions.csv",
+          "bytes": 863021
+        },
+        {
+          "name": "ucie_flits.csv",
+          "bytes": 153792788
+        },
+        {
+          "name": "ucie_mem.csv",
+          "bytes": 76985191
+        },
+        {
+          "name": "ucie_soc.csv",
+          "bytes": 76807700
+        },
+        {
+          "name": "validation-run.log",
+          "bytes": 103
+        },
+        {
+          "name": "verification.log",
+          "bytes": 1987
+        },
+        {
+          "name": "view_store.js",
+          "bytes": 3003
+        }
+      ],
+      "complete_directory_file_count": 2443,
+      "complete_directory_bytes": 652112750
+    }
+  }
+}

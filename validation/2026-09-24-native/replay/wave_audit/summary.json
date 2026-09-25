@@ -1,0 +1,49 @@
+{
+  "replay": {
+    "passed": true,
+    "source": "/home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-native-20260924-2255/replay",
+    "sampled_rising_edges": 9100,
+    "handshakes": {
+      "AW": 128,
+      "W": 128,
+      "B": 128,
+      "AR": 128,
+      "R": 128
+    },
+    "stalled_edges": {
+      "W": 128,
+      "B": 63,
+      "R": 167
+    },
+    "first_valid_ns": {
+      "wvalid": 256.0,
+      "awvalid": 260.0,
+      "bvalid": 388.0,
+      "arvalid": 4860.0,
+      "rvalid": 4904.0
+    },
+    "ready_transitions": {
+      "arready": 2,
+      "awready": 2,
+      "bready": 3637,
+      "rready": 2599,
+      "wready": 257
+    },
+    "first_handshake_ns": {
+      "AW": 262.0,
+      "W": 266.0,
+      "B": 394.0,
+      "AR": 4862.0,
+      "R": 4906.0
+    },
+    "checked": [
+      "VCD/CSV equality",
+      "VALID/payload hold",
+      "clocked output transitions",
+      "BVALID after AW/all W",
+      "RVALID after AR",
+      "WLAST/RLAST",
+      "drained"
+    ]
+  }
+}

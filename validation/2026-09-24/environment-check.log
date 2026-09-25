@@ -1,0 +1,17 @@
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 25.1.0.1
+gem5 compiled Sep 24 2026 19:31:25
+gem5 started Sep 24 2026 20:00:21
+gem5 executing on tank, pid 1882358
+command line: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/third_party/gem5/build/AXI/gem5.opt --listener-mode=off -d /home/hy258/hy/zhongxing/coralnpu_StorageStacked/build/check -c 'import m5.objects as o; assert hasattr(o, '"'"'CoralNPU'"'"'); assert not hasattr(o, '"'"'VortexGPGPU'"'"'); assert not hasattr(o, '"'"'AxiPacketTester'"'"'); assert not hasattr(o, '"'"'UnifiedTimingMemory'"'"'); print('"'"'DEVICE_ISOLATION_PASS'"'"')'
+
+DEVICE_ISOLATION_PASS
+{
+  "available": true,
+  "device": "coralnpu",
+  "gem5_bytes": 866976792,
+  "library_bytes": 4675768,
+  "scope": "availability and device isolation"
+}

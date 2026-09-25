@@ -1,0 +1,11 @@
+{
+  "seed": 20260925,
+  "steps": 1500,
+  "batch_size": 32,
+  "sequence_length": 12,
+  "learning_rate": 0.015,
+  "dim": 8,
+  "heads": 2,
+  "hidden_dim": 16,
+  "context_length": 16
+}

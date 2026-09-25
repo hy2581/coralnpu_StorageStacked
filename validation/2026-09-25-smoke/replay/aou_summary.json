@@ -1,0 +1,1 @@
+{"width":256,"planes":2,"memory_completed":256,"memory_errors":0,"target_reads":128,"target_writes":128,"target_read_beats":128,"target_write_beats":128,"tx_flits":645,"rx_flits":1028,"forward_replays":21,"reverse_replays":51,"crc_errors":46,"order_violations":0}

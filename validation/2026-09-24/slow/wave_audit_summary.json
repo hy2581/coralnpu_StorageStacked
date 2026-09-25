@@ -1,0 +1,49 @@
+{
+  "slow": {
+    "passed": true,
+    "source": "/home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-20260924/slow",
+    "sampled_rising_edges": 16749,
+    "handshakes": {
+      "AW": 128,
+      "W": 128,
+      "B": 128,
+      "AR": 128,
+      "R": 128
+    },
+    "stalled_edges": {
+      "W": 160,
+      "B": 126,
+      "R": 119
+    },
+    "first_valid_ns": {
+      "wvalid": 252.0,
+      "awvalid": 258.0,
+      "bvalid": 344.0,
+      "arvalid": 7702.0,
+      "rvalid": 7796.0
+    },
+    "ready_transitions": {
+      "arready": 2,
+      "awready": 2,
+      "bready": 6696,
+      "rready": 4784,
+      "wready": 257
+    },
+    "first_handshake_ns": {
+      "AW": 260.0,
+      "W": 264.0,
+      "B": 346.0,
+      "AR": 7704.0,
+      "R": 7804.0
+    },
+    "checked": [
+      "VCD/CSV equality",
+      "VALID/payload hold",
+      "clocked output transitions",
+      "BVALID after AW/all W",
+      "RVALID after AR",
+      "WLAST/RLAST",
+      "drained"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "passed": true,
+  "device": "coralnpu",
+  "benchmark": {
+    "name": "memory_roundtrip",
+    "words": 128,
+    "iterations": 2,
+    "stride_words": 2,
+    "seed": 90,
+    "multiplier": 2
+  },
+  "axi_data_bits": 256,
+  "completion": {
+    "cause": "CoralNPU: kernel complete",
+    "code": 0,
+    "tick_fs": 97192000000,
+    "mailbox": 1611464704,
+    "passed": true
+  },
+  "sources": {
+    "coralnpu": {
+      "transactions": 1024,
+      "bytes": 16384,
+      "roundtrip_mean_ns": 74.63671875
+    }
+  },
+  "devices": {
+    "cycles": 48596,
+    "words": 128,
+    "iterations": 2,
+    "mailbox": 1611464704
+  },
+  "checks": {
+    "check_summary": {
+      "passed": true,
+      "axi_data_bits": 256,
+      "transactions": 1024,
+      "axi_handshakes": 2560,
+      "max_tlm_latency_ns": 320.0,
+      "coverage": {
+        "narrow_bursts": 1024,
+        "full_width_bursts": 0,
+        "bursts_256_beats": 0,
+        "masked_write_beats": 512,
+        "aw_before_w": 512,
+        "w_before_aw": 0,
+        "error_responses": 0,
+        "checked_read_bytes": 8192
+      }
+    },
+    "aou_check_summary": {
+      "passed": true,
+      "master_data_bits": 256,
+      "wide_handshakes": 2560,
+      "wide_vcd_data_beats": 1024,
+      "width": 256,
+      "planes": 2,
+      "memory_completed": 1024,
+      "memory_errors": 0,
+      "target_reads": 512,
+      "target_writes": 512,
+      "target_read_beats": 512,
+      "target_write_beats": 512,
+      "tx_flits": 2565,
+      "rx_flits": 4100,
+      "forward_replays": 0,
+      "reverse_replays": 0,
+      "crc_errors": 0,
+      "order_violations": 0
+    },
+    "memsim_check": {
+      "passed": true,
+      "bursts": 1024,
+      "children": 1024,
+      "errors": 0,
+      "image_bytes": 2048,
+      "window_bytes": 805306368,
+      "period_fs": 250000,
+      "commands": {
+        "REFpb": 3184,
+        "ACT": 40,
+        "WR": 512,
+        "PREpb": 39,
+        "RD": 512
+      },
+      "dfi_data_events": 1024,
+      "submit_stalls": 0,
+      "response_stalls": 0
+    },
+    "memsim_core": {
+      "passed": true,
+      "submitted": 1024,
+      "returned": 1024,
+      "submit_stalls": 0,
+      "cycles": 388768,
+      "commands": 4287,
+      "dfi_events": 5311,
+      "command_errors": 0,
+      "dfi_errors": 0
+    }
+  },
+  "wave": {
+    "alternate": {
+      "passed": true,
+      "source": "/home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-20260924/alternate",
+      "sampled_rising_edges": 48597,
+      "handshakes": {
+        "AW": 512,
+        "W": 512,
+        "B": 512,
+        "AR": 512,
+        "R": 512
+      },
+      "stalled_edges": {
+        "W": 640,
+        "B": 271,
+        "R": 492
+      },
+      "first_valid_ns": {
+        "wvalid": 258.0,
+        "awvalid": 264.0,
+        "bvalid": 388.0,
+        "arvalid": 13094.0,
+        "rvalid": 13138.0
+      },
+      "ready_transitions": {
+        "arready": 2,
+        "awready": 2,
+        "bready": 19436,
+        "rready": 13884,
+        "wready": 1025
+      },
+      "first_handshake_ns": {
+        "AW": 266.0,
+        "W": 270.0,
+        "B": 394.0,
+        "AR": 13096.0,
+        "R": 13140.0
+      },
+      "checked": [
+        "VCD/CSV equality",
+        "VALID/payload hold",
+        "clocked output transitions",
+        "BVALID after AW/all W",
+        "RVALID after AR",
+        "WLAST/RLAST",
+        "drained"
+      ]
+    }
+  },
+  "scope": "accelerator -> native AXI256 -> AXI2Flit -> UCIe -> online mem_sim -> returned data"
+}

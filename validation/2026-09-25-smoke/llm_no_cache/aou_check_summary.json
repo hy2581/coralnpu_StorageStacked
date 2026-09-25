@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "master_data_bits": 256,
+  "wide_handshakes": 35189,
+  "wide_vcd_data_beats": 15746,
+  "width": 256,
+  "planes": 2,
+  "memory_completed": 15746,
+  "memory_errors": 0,
+  "target_reads": 12049,
+  "target_writes": 3697,
+  "target_read_beats": 12049,
+  "target_write_beats": 3697,
+  "tx_flits": 35194,
+  "rx_flits": 62988,
+  "forward_replays": 0,
+  "reverse_replays": 0,
+  "crc_errors": 0,
+  "order_violations": 0
+}

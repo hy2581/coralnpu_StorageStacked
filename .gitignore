@@ -1,0 +1,19 @@
+# Machine-local environments and generated output
+/.deps/
+/build/
+/results/
+/mem_sim/build-unified/
+__pycache__/
+*.pyc
+/third_party/*/build/
+/third_party/coralnpu/bazel-*
+/third_party/vortex/third_party/*/build/
+/third_party/vortex/third_party/**/*.o
+/third_party/vortex/third_party/**/*.a
+/third_party/vortex/third_party/**/*.so
+# GitHub stores the source trees directly, without nested repositories.
+**/.gitmodules
+# Optional physical-design collateral / unrelated packaged test data stay local.
+/third_party/vortex/hw/syn/libs/cln*/
+/third_party/vortex/miscs/apptainer/boost-package.deb
+/third_party/vortex/tests/opencl/spmv/Dubcova3.mtx

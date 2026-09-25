@@ -1,0 +1,17 @@
+step=1 cross_entropy=3.017709
+step=100 cross_entropy=0.441693
+step=200 cross_entropy=0.272648
+step=300 cross_entropy=0.251553
+step=400 cross_entropy=0.210240
+step=500 cross_entropy=0.192145
+step=600 cross_entropy=0.261855
+step=700 cross_entropy=0.178926
+step=800 cross_entropy=0.191901
+step=900 cross_entropy=0.198587
+step=1000 cross_entropy=0.188020
+step=1100 cross_entropy=0.180024
+step=1200 cross_entropy=0.186738
+step=1300 cross_entropy=0.144807
+step=1400 cross_entropy=0.153576
+step=1500 cross_entropy=0.171689
+Saved /home/hy258/hy/zhongxing/coralnpu_StorageStacked/config/llm/tiny_char_v1.json

@@ -1,0 +1,13 @@
+
+        SystemC 2.3.1-Accellera --- Sep 24 2026 22:25:40
+        Copyright (c) 1996-2014 by all Contributors,
+        ALL RIGHTS RESERVED
+CoralNPU native / standalone SystemC / online mem_sim
+{
+  "available": true,
+  "device": "coralnpu",
+  "runtime": "standalone-systemc",
+  "simulator_bytes": 1942328,
+  "library_bytes": 4668608,
+  "scope": "availability and device isolation"
+}

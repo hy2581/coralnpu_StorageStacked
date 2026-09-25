@@ -1,0 +1,1 @@
+{"standard":"hbm4","channels":2,"timing_scale":4,"period_fs":1000000,"transaction_bytes":32,"queue_depth":4,"window_bytes":805306368,"phy":"behavioral","tick_multiplier":2,"tCK_ps":500,"effective_tCK_ps":2000,"density_gbit":2,"data_bus_bits":128,"data_rate_mbps":8000,"capacity_bytes":2147483648,"provisional_timing_entries":23}

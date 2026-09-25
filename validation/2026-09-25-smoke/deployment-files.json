@@ -1,0 +1,59 @@
+{
+  "source_base_commit": "581f86624ab31806a1705e7f0d053b503c503e9f",
+  "scope": "Local working tree deployment with uncommitted changes; base commit alone does not identify this deployment.",
+  "runtime_build_inputs_version": "native-v3-benchmarks",
+  "source_files": [
+    {
+      "name": "benchmarks/README.md",
+      "bytes": 1565
+    },
+    {
+      "name": "benchmarks/smoke/kernel.cc",
+      "bytes": 648
+    },
+    {
+      "name": "benchmarks/memory_roundtrip/kernel.cc",
+      "bytes": 1051
+    },
+    {
+      "name": "benchmarks/tiny_llm/kernel.cc",
+      "bytes": 5509
+    },
+    {
+      "name": "config/benchmarks/smoke.json",
+      "bytes": 37
+    },
+    {
+      "name": "scripts/configure.py",
+      "bytes": 6203
+    },
+    {
+      "name": "scripts/run.py",
+      "bytes": 4506
+    },
+    {
+      "name": "scripts/test.py",
+      "bytes": 9436
+    },
+    {
+      "name": "scripts/verify.py",
+      "bytes": 9486
+    },
+    {
+      "name": "scripts/verify_smoke.py",
+      "bytes": 5518
+    },
+    {
+      "name": "scripts/check_smoke_negative.py",
+      "bytes": 2137
+    },
+    {
+      "name": "integration/coralnpu/BUILD.bazel",
+      "bytes": 989
+    },
+    {
+      "name": "run.sh",
+      "bytes": 768
+    }
+  ]
+}

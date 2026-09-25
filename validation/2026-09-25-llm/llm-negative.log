@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "checks": {
+    "wrong_weight": {
+      "rejected": true,
+      "reason": "Weight staging mismatch at 0x90000000"
+    },
+    "wrong_logits": {
+      "rejected": true,
+      "reason": "logits mismatch at 0x90030200: 5.140663146972656 != 4.140661507010103"
+    },
+    "wrong_generated_token": {
+      "rejected": true,
+      "reason": "report mismatch at 0x90050040: 5 != 4"
+    },
+    "wrong_kv": {
+      "rejected": true,
+      "reason": "kv_k mismatch at 0x90010000: -0.5839860439300537 != -1.5839859906711975"
+    },
+    "missing_intermediate": {
+      "rejected": true,
+      "reason": "Missing weight/KV/intermediate/token/report writes"
+    },
+    "reference_causal_mask": {
+      "passed": true
+    },
+    "config_empty_prompt": {
+      "rejected": true,
+      "reason": "prompt must be a nonempty string"
+    },
+    "config_unknown_character": {
+      "rejected": true,
+      "reason": "prompt contains characters absent from model vocabulary"
+    },
+    "config_context_overflow": {
+      "rejected": true,
+      "reason": "prompt plus processed decode tokens exceeds model context_length"
+    },
+    "config_zero_tokens": {
+      "rejected": true,
+      "reason": "generated_tokens must be an integer in [1, 8]"
+    },
+    "config_too_many_tokens": {
+      "rejected": true,
+      "reason": "generated_tokens must be an integer in [1, 8]"
+    },
+    "config_non_boolean_cache": {
+      "rejected": true,
+      "reason": "kv_cache must be true/false"
+    },
+    "config_unknown_field": {
+      "rejected": true,
+      "reason": "benchmark: expected keys name model prompt generated_tokens kv_cache; got name, model, prompt, generated_tokens, kv_cache, batch"
+    },
+    "config_external_model": {
+      "rejected": true,
+      "reason": "LLM models must be stored inside this project config/llm directory"
+    },
+    "config_max_context_single_token": {
+      "passed": true
+    }
+  }
+}
+

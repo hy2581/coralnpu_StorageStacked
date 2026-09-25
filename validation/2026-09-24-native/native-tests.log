@@ -1,0 +1,44 @@
+Internal ctest changing into directory: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/mem_sim/build-unified
+Test project /home/hy258/hy/zhongxing/coralnpu_StorageStacked/mem_sim/build-unified
+      Start  1: refactor_tests
+ 1/19 Test  #1: refactor_tests .......................   Passed    0.09 sec
+      Start  2: result_value_tests
+ 2/19 Test  #2: result_value_tests ...................   Passed    0.00 sec
+      Start  3: sequence_tests
+ 3/19 Test  #3: sequence_tests .......................   Passed    0.16 sec
+      Start  4: timing_boundary_tests
+ 4/19 Test  #4: timing_boundary_tests ................   Passed    0.26 sec
+      Start  5: phy_tests
+ 5/19 Test  #5: phy_tests ............................   Passed    0.01 sec
+      Start  6: config_tests
+ 6/19 Test  #6: config_tests .........................   Passed    0.04 sec
+      Start  7: model_config_tests
+ 7/19 Test  #7: model_config_tests ...................   Passed    0.05 sec
+      Start  8: scheduler_contract_tests
+ 8/19 Test  #8: scheduler_contract_tests .............   Passed    0.01 sec
+      Start  9: phy_smoke
+ 9/19 Test  #9: phy_smoke ............................   Passed    0.72 sec
+      Start 10: visualization_smoke
+10/19 Test #10: visualization_smoke ..................   Passed    0.27 sec
+      Start 11: multistack_backend_smoke
+11/19 Test #11: multistack_backend_smoke .............   Passed    0.22 sec
+      Start 12: multistack_demos_smoke
+12/19 Test #12: multistack_demos_smoke ...............   Passed    0.83 sec
+      Start 13: architecture_sweep_smoke
+13/19 Test #13: architecture_sweep_smoke .............   Passed    1.19 sec
+      Start 14: smoke
+14/19 Test #14: smoke ................................   Passed   25.88 sec
+      Start 15: result_contract
+15/19 Test #15: result_contract ......................   Passed    3.57 sec
+      Start 16: timing_boundary_validation
+16/19 Test #16: timing_boundary_validation ...........   Passed    0.36 sec
+      Start 17: model_validation
+17/19 Test #17: model_validation .....................   Passed    4.53 sec
+      Start 18: performance_curve_validation
+18/19 Test #18: performance_curve_validation .........   Passed    1.19 sec
+      Start 19: sensitivity_uncertainty_validation
+19/19 Test #19: sensitivity_uncertainty_validation ...   Passed    4.79 sec
+
+100% tests passed, 0 tests failed out of 19
+
+Total Test time (real) =  44.20 sec

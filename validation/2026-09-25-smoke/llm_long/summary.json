@@ -1,0 +1,272 @@
+{
+  "passed": true,
+  "device": "coralnpu",
+  "benchmark": {
+    "name": "tiny_llm",
+    "model": "config/llm/tiny_char_v1.json",
+    "prompt": "one two",
+    "generated_tokens": 3,
+    "kv_cache": true
+  },
+  "axi_data_bits": 256,
+  "completion": {
+    "passed": true,
+    "code": 0,
+    "cause": "CoralNPU: kernel complete",
+    "tick_fs": 950062000000,
+    "cycles": 475020,
+    "mailbox": 1611464704
+  },
+  "sources": {
+    "coralnpu": {
+      "transactions": 10243,
+      "bytes": 163888,
+      "roundtrip_mean_ns": 56.51723127989847
+    }
+  },
+  "devices": {
+    "cycles": 475020,
+    "prompt_tokens": 7,
+    "generated_tokens": 3,
+    "mailbox": 1611464704
+  },
+  "checks": {
+    "check_summary": {
+      "passed": true,
+      "axi_data_bits": 256,
+      "transactions": 10243,
+      "axi_handshakes": 23220,
+      "max_request_latency_ns": 326.0,
+      "coverage": {
+        "narrow_bursts": 10243,
+        "full_width_bursts": 0,
+        "bursts_256_beats": 0,
+        "masked_write_beats": 2734,
+        "aw_before_w": 2734,
+        "w_before_aw": 0,
+        "error_responses": 0,
+        "checked_read_bytes": 120144
+      }
+    },
+    "aou_check_summary": {
+      "passed": true,
+      "master_data_bits": 256,
+      "wide_handshakes": 23220,
+      "wide_vcd_data_beats": 10243,
+      "width": 256,
+      "planes": 2,
+      "memory_completed": 10243,
+      "memory_errors": 0,
+      "target_reads": 7509,
+      "target_writes": 2734,
+      "target_read_beats": 7509,
+      "target_write_beats": 2734,
+      "tx_flits": 23225,
+      "rx_flits": 40976,
+      "forward_replays": 0,
+      "reverse_replays": 0,
+      "crc_errors": 0,
+      "order_violations": 0
+    },
+    "memsim_check": {
+      "passed": true,
+      "bursts": 10243,
+      "children": 10243,
+      "errors": 0,
+      "image_bytes": 10656,
+      "window_bytes": 805306368,
+      "period_fs": 250000,
+      "commands": {
+        "REFpb": 31148,
+        "ACT": 478,
+        "WR": 2734,
+        "PREpb": 477,
+        "RD": 7509
+      },
+      "dfi_data_events": 10243,
+      "submit_stalls": 0,
+      "response_stalls": 0
+    },
+    "memsim_core": {
+      "passed": true,
+      "submitted": 10243,
+      "returned": 10243,
+      "submit_stalls": 0,
+      "cycles": 3800399,
+      "commands": 42346,
+      "dfi_events": 52589,
+      "command_errors": 0,
+      "dfi_errors": 0
+    }
+  },
+  "wave": {
+    "llm_long": {
+      "passed": true,
+      "source": "/home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-smoke-20260925/llm_long",
+      "sampled_rising_edges": 475050,
+      "handshakes": {
+        "AW": 2734,
+        "W": 2734,
+        "B": 2734,
+        "AR": 7509,
+        "R": 7509
+      },
+      "stalled_edges": {
+        "W": 5472,
+        "B": 1960,
+        "R": 10344
+      },
+      "first_valid_ns": {
+        "wvalid": 298.0,
+        "awvalid": 302.0,
+        "bvalid": 388.0,
+        "arvalid": 91580.0,
+        "rvalid": 91624.0
+      },
+      "ready_transitions": {
+        "arready": 2,
+        "awready": 2,
+        "bready": 190017,
+        "rready": 135727,
+        "wready": 5469
+      },
+      "first_handshake_ns": {
+        "AW": 304.0,
+        "W": 308.0,
+        "B": 394.0,
+        "AR": 91582.0,
+        "R": 91626.0
+      },
+      "checked": [
+        "VCD/CSV equality",
+        "VALID/payload hold",
+        "clocked output transitions",
+        "BVALID after AW/all W",
+        "RVALID after AR",
+        "WLAST/RLAST",
+        "drained"
+      ]
+    }
+  },
+  "scope": "CoralNPU RTL callbacks -> bounded AXI256 adapter -> AXI2Flit -> UCIe -> online mem_sim -> returned data",
+  "llm": {
+    "passed": true,
+    "model_version": "tiny-char-trained-v1",
+    "model_parameters": 1001,
+    "architecture": {
+      "dim": 8,
+      "heads": 2,
+      "hidden_dim": 16,
+      "layers": 1,
+      "context_length": 16,
+      "vocab_size": 17,
+      "normalization": "layernorm",
+      "epsilon": 1e-05,
+      "activation": "relu"
+    },
+    "prompt": "one two",
+    "prompt_tokens": [
+      12,
+      11,
+      7,
+      1,
+      14,
+      16,
+      12
+    ],
+    "generated_token_ids": [
+      2,
+      1,
+      14
+    ],
+    "generated_text": ". t",
+    "kv_cache": true,
+    "processed_token_positions": 9,
+    "forward_calls": 9,
+    "verified_float_writes": 1705,
+    "numeric_tolerance": {
+      "absolute": 2e-05,
+      "relative": 2e-05
+    },
+    "maximum_absolute_error_by_stage": {
+      "kv_k": 3.487334785390317e-07,
+      "kv_v": 2.863048198520346e-07,
+      "embedding": 2.9802322387695312e-08,
+      "norm1": 2.6149760712357306e-07,
+      "q": 3.57713650256386e-07,
+      "k": 3.487334785390317e-07,
+      "v": 2.863048198520346e-07,
+      "attention": 2.108473672879363e-07,
+      "attention_output": 3.598166946616743e-07,
+      "residual": 3.821684364524458e-07,
+      "norm2": 5.172945248821392e-07,
+      "ff": 5.410545514950016e-07,
+      "hidden": 8.852523409874635e-07,
+      "norm_final": 1.9335025855937715e-06,
+      "logits": 6.3029924293189765e-06
+    },
+    "traffic": {
+      "report": {
+        "writes": 16,
+        "reads": 3
+      },
+      "weights": {
+        "writes": 1004,
+        "reads": 6777
+      },
+      "keys": {
+        "writes": 200,
+        "reads": 360
+      },
+      "values": {
+        "writes": 200,
+        "reads": 360
+      },
+      "tokens": {
+        "writes": 9,
+        "reads": 9
+      },
+      "intermediates": {
+        "writes": 1305
+      }
+    },
+    "weight_tensor_reads": {
+      "embedding": 72,
+      "position": 72,
+      "norm1_weight": 72,
+      "norm1_bias": 72,
+      "q": 576,
+      "k": 576,
+      "v": 576,
+      "o": 576,
+      "norm2_weight": 72,
+      "norm2_bias": 72,
+      "ff1": 1152,
+      "ff1_bias": 144,
+      "ff2": 1152,
+      "ff2_bias": 72,
+      "norm_final_weight": 72,
+      "norm_final_bias": 72,
+      "lm_head": 1224,
+      "lm_bias": 153
+    },
+    "timing": {
+      "unit": "ns",
+      "initialization_ns": 90498.0,
+      "prefill_to_first_token_ns": 649038.0,
+      "decode_inter_token_ns": [
+        103656.0,
+        106030.0
+      ],
+      "decode_tokens_per_simulated_second": 9538.071211239663,
+      "inference_to_last_token_ns": 858724.0,
+      "phase_duration_ns": [
+        649304.0,
+        103602.0,
+        105910.0
+      ],
+      "scope": "RTL simulation including observation/marker traffic; excludes model staging and startup from prefill/decode"
+    },
+    "scope": "Trained miniature character decoder functional benchmark; scalar FP32, one layer, no general-language quality claim"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "axi_data_bits": 256,
+  "transactions": 10243,
+  "axi_handshakes": 23220,
+  "max_request_latency_ns": 326.0,
+  "coverage": {
+    "narrow_bursts": 10243,
+    "full_width_bursts": 0,
+    "bursts_256_beats": 0,
+    "masked_write_beats": 2734,
+    "aw_before_w": 2734,
+    "w_before_aw": 0,
+    "error_responses": 0,
+    "checked_read_bytes": 120144
+  }
+}
+{
+  "passed": true,
+  "master_data_bits": 256,
+  "wide_handshakes": 23220,
+  "wide_vcd_data_beats": 10243,
+  "width": 256,
+  "planes": 2,
+  "memory_completed": 10243,
+  "memory_errors": 0,
+  "target_reads": 7509,
+  "target_writes": 2734,
+  "target_read_beats": 7509,
+  "target_write_beats": 2734,
+  "tx_flits": 23225,
+  "rx_flits": 40976,
+  "forward_replays": 0,
+  "reverse_replays": 0,
+  "crc_errors": 0,
+  "order_violations": 0
+}
+llm_long UCIe/AXI trace PASS {'passed': True, 'records': 256804, 'events': {'TX_FDI': 64201, 'TX_FRAME': 64201, 'RX_FRAME': 64201, 'RX_FDI': 64201}, 'rx_status': {'in_order': 64201}, 'fdi_delivered': 64201, 'fdi_in_flight_at_exit': 0, 'axi_handshakes': 23220, 'business_messages': 23220}
+{
+  "passed": true,
+  "bursts": 10243,
+  "children": 10243,
+  "errors": 0,
+  "image_bytes": 10656,
+  "window_bytes": 805306368,
+  "period_fs": 250000,
+  "commands": {
+    "REFpb": 31148,
+    "ACT": 478,
+    "WR": 2734,
+    "PREpb": 477,
+    "RD": 7509
+  },
+  "dfi_data_events": 10243,
+  "submit_stalls": 0,
+  "response_stalls": 0
+}
+llm_long PASS 23220 handshakes
+{
+  "passed": true,
+  "device": "coralnpu",
+  "sources": {
+    "coralnpu": {
+      "transactions": 10243,
+      "bytes": 163888,
+      "roundtrip_mean_ns": 56.51723127989847
+    }
+  },
+  "devices": {
+    "cycles": 475020,
+    "prompt_tokens": 7,
+    "generated_tokens": 3,
+    "mailbox": 1611464704
+  }
+}
+Trace viewer: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-smoke-20260925/llm_long/trace_view.html
+Generated /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-smoke-20260925/llm_long/memsim_view.html

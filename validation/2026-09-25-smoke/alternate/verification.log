@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "axi_data_bits": 256,
+  "transactions": 1024,
+  "axi_handshakes": 2560,
+  "max_request_latency_ns": 320.0,
+  "coverage": {
+    "narrow_bursts": 1024,
+    "full_width_bursts": 0,
+    "bursts_256_beats": 0,
+    "masked_write_beats": 512,
+    "aw_before_w": 512,
+    "w_before_aw": 0,
+    "error_responses": 0,
+    "checked_read_bytes": 8192
+  }
+}
+{
+  "passed": true,
+  "master_data_bits": 256,
+  "wide_handshakes": 2560,
+  "wide_vcd_data_beats": 1024,
+  "width": 256,
+  "planes": 2,
+  "memory_completed": 1024,
+  "memory_errors": 0,
+  "target_reads": 512,
+  "target_writes": 512,
+  "target_read_beats": 512,
+  "target_write_beats": 512,
+  "tx_flits": 2565,
+  "rx_flits": 4100,
+  "forward_replays": 0,
+  "reverse_replays": 0,
+  "crc_errors": 0,
+  "order_violations": 0
+}
+alternate UCIe/AXI trace PASS {'passed': True, 'records': 26660, 'events': {'TX_FDI': 6665, 'TX_FRAME': 6665, 'RX_FRAME': 6665, 'RX_FDI': 6665}, 'rx_status': {'in_order': 6665}, 'fdi_delivered': 6665, 'fdi_in_flight_at_exit': 0, 'axi_handshakes': 2560, 'business_messages': 2560}
+{
+  "passed": true,
+  "bursts": 1024,
+  "children": 1024,
+  "errors": 0,
+  "image_bytes": 2048,
+  "window_bytes": 805306368,
+  "period_fs": 250000,
+  "commands": {
+    "REFpb": 2360,
+    "ACT": 30,
+    "WR": 512,
+    "PREpb": 29,
+    "RD": 512
+  },
+  "dfi_data_events": 1024,
+  "submit_stalls": 0,
+  "response_stalls": 0
+}
+alternate PASS 2560 handshakes
+{
+  "passed": true,
+  "device": "coralnpu",
+  "sources": {
+    "coralnpu": {
+      "transactions": 1024,
+      "bytes": 16384,
+      "roundtrip_mean_ns": 56.029296875
+    }
+  },
+  "devices": {
+    "cycles": 35997,
+    "words": 128,
+    "iterations": 2,
+    "mailbox": 1611464704
+  }
+}
+Trace viewer: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-smoke-20260925/alternate/trace_view.html
+Generated /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/acceptance-smoke-20260925/alternate/memsim_view.html

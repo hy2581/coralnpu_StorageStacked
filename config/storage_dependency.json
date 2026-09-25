@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/hy2581/axi_StorageStacked.git",
+  "version": "1.0.0",
+  "path_environment": "STORAGE_STACK_ROOT",
+  "default_path": "../axi_StorageStacked",
+  "interface": "AXI4 INCR, 256 data bits, 64 address bits, IDs 1..1023, 1 fs",
+  "tested_commit": "cf865a64975d0541866320d0b0dd37cf2b1296f2"
+}
