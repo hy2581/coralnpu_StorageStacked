@@ -1,6 +1,6 @@
 # integration 介绍
 
-[文档目录](README.md) · 按需查参数，第一次使用先看目录中的入门或配置实验。
+[返回文档目录](README.md)。
 
 `integration/` 把 CoralNPU 设备接口接到公共 AXI 存储项目，并提供仿真进程入口。
 用户通过 `user/run.sh` 启动它，通常只需修改项目 JSON。
@@ -34,7 +34,7 @@ flowchart LR
 通过 `add_subdirectory` 使用公共存储源码，关闭公共项目的独立 CLI。
 把 `main.cc`、`axi_master.cc`、`storage.cc` 编译为 `coralnpu_sim`，
 链接 `StorageStacked::axi` 和 `libcoralnpu-native.so`。
-构建产物放在 `coralnpu/.cache/build/`，由根目录构建入口和用户运行入口管理。
+编译出的文件放在 `coralnpu/.cache/build/`，由根目录构建入口和用户运行入口管理。
 
 ```mermaid
 flowchart LR
