@@ -1,8 +1,0 @@
-cycle,phase,request_id,kind,command,stack_id,dfi_cs_n,dfi_address,dfi_bank,dfi_reset_n,dfi_cke,dfi_odt,dfi_rddata_en,dfi_wrdata_en,dfi_rddata_valid,dfi_wrdata,dfi_wrdata_mask,dfi_rddata,channel,pseudo_channel,sid,rank,bank_group,bank,row,column,address,system_address,issued_cycle,payload_source,payload_initialized,payload_init_mask
-17,1,1,COMMAND,ACT,0,0,0x0,0x0,1,1,0,0,0,0,,,,0,0,0,0,0,0,0,0,0x3,0x3,17,none,1,
-49,1,1,COMMAND,WR,0,0,0x900000000000000,0x0,1,1,1,0,0,0,,,,0,0,0,0,0,0,0,0,0x3,0x3,49,none,1,
-71,1,1,WRITE_DATA,WR,0,1,0x900000000000000,0x0,1,1,1,0,1,0,0102030405060708,00ff00ff00ff00ff,,0,0,0,0,0,0,0,0,0x3,0x3,49,request_payload,1,ffffffffffffffff
-71,1,2,COMMAND,WR,0,0,0x900000000000001,0x0,1,1,1,0,0,0,,,,0,0,0,0,0,0,0,1,0x23,0x23,71,none,1,
-93,1,2,WRITE_DATA,WR,0,1,0x900000000000001,0x0,1,1,1,0,1,0,0102030405060708,00ff00ff00ff00ff,,0,0,0,0,0,0,0,1,0x23,0x23,71,request_payload,1,ffffffffffffffff
-121,1,3,COMMAND,RD,0,0,0x800000000000000,0x0,1,1,0,1,0,0,,,,0,0,0,0,0,0,0,0,0x3,0x3,121,none,1,
-187,1,3,READ_DATA,RD,0,1,0x800000000000000,0x0,1,1,0,0,0,1,,,0100030005000700,0,0,0,0,0,0,0,0,0x3,0x3,121,memory_image,1,ffffffffffffffff

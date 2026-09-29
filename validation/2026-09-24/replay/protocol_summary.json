@@ -1,1 +1,0 @@
-{"accepted":256,"completed":256,"max_outstanding":1,"drained":true,"ticks_per_second":1000000000000000,"period_ticks":2000000,"axi_data_bits":256,"channels":{"AW":{"handshakes":128,"stall_cycles":0},"W":{"handshakes":128,"stall_cycles":160},"B":{"handshakes":128,"stall_cycles":46},"AR":{"handshakes":128,"stall_cycles":0},"R":{"handshakes":128,"stall_cycles":123}}}

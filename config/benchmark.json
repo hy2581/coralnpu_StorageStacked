@@ -1,8 +1,0 @@
-{
-  "name": "memory_roundtrip",
-  "words": 64,
-  "iterations": 1,
-  "stride_words": 1,
-  "seed": 90,
-  "multiplier": 2
-}

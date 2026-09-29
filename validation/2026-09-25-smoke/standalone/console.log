@@ -1,3 +1,0 @@
-SMOKE: 41 + 1 = 42 (uint32); 4 external transactions; 10 AXI handshakes; 293 NPU cycles
-Report: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/smoke-final-20260925/smoke_report.md
-PASS: /home/hy258/hy/zhongxing/coralnpu_StorageStacked/results/smoke-final-20260925/summary.json

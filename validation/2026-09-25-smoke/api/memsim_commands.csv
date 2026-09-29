@@ -1,5 +1,0 @@
-cycle,request_id,command,bus,stack_id,channel,pseudo_channel,sid,rank,bank_group,bank,row,column,address,system_address
-17,1,ACT,Row,0,0,0,0,0,0,0,0,0,0x3,0x3
-49,1,WR,Column,0,0,0,0,0,0,0,0,0,0x3,0x3
-71,2,WR,Column,0,0,0,0,0,0,0,0,1,0x23,0x23
-121,3,RD,Column,0,0,0,0,0,0,0,0,0,0x3,0x3

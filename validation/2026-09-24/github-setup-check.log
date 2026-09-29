@@ -1,3 +1,0 @@
-现有工具环境与锁文件一致，无需重新安装。
-Vendored source snapshots are ready; no recursive Git checkout required
-环境已就绪。下一步：./run.sh build

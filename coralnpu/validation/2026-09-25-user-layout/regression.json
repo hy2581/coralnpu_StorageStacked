@@ -1,0 +1,225 @@
+{
+  "passed": true,
+  "native_tests_passed": 19,
+  "api_check": {
+    "passed": true,
+    "masked_read": [
+      1,
+      0,
+      3,
+      0,
+      5,
+      0,
+      7,
+      0
+    ],
+    "queue_retry": true,
+    "large_window_bytes": 8589934592,
+    "high_address_no_alias": true,
+    "sparse_zero_initialized": true
+  },
+  "negative_checks": {
+    "check_llm_negative": {
+      "passed": true,
+      "checks": {
+        "wrong_weight": {
+          "rejected": true,
+          "reason": "Weight staging mismatch at 0x90000000"
+        },
+        "wrong_logits": {
+          "rejected": true,
+          "reason": "logits mismatch at 0x90030200: 5.140663146972656 != 4.140661507010103"
+        },
+        "wrong_generated_token": {
+          "rejected": true,
+          "reason": "report mismatch at 0x90050040: 5 != 4"
+        },
+        "wrong_kv": {
+          "rejected": true,
+          "reason": "kv_k mismatch at 0x90010000: -0.5839860439300537 != -1.5839859906711975"
+        },
+        "missing_intermediate": {
+          "rejected": true,
+          "reason": "Missing weight/KV/intermediate/token/report writes"
+        },
+        "reference_causal_mask": {
+          "passed": true
+        },
+        "config_empty_prompt": {
+          "rejected": true,
+          "reason": "prompt and generated tokens exceed the model context (16)"
+        },
+        "config_unknown_character": {
+          "rejected": true,
+          "reason": "prompt contains characters absent from model vocabulary"
+        },
+        "config_context_overflow": {
+          "rejected": true,
+          "reason": "prompt and generated tokens exceed the model context (16)"
+        },
+        "config_zero_tokens": {
+          "rejected": true,
+          "reason": "program.generated_tokens must be an integer in [1, 8]"
+        },
+        "config_too_many_tokens": {
+          "rejected": true,
+          "reason": "program.generated_tokens must be an integer in [1, 8]"
+        },
+        "config_non_boolean_cache": {
+          "rejected": true,
+          "reason": "kv_cache must be boolean"
+        },
+        "config_unknown_field": {
+          "rejected": true,
+          "reason": "program: expected fields type prompt generated_tokens kv_cache"
+        },
+        "config_max_context_single_token": {
+          "passed": true
+        }
+      }
+    },
+    "check_negative": {
+      "passed": true,
+      "checks": {
+        "missing_source_response": {
+          "rejected": true,
+          "reason": ""
+        },
+        "source_write_byte": {
+          "rejected": true,
+          "reason": ""
+        },
+        "source_read_byte": {
+          "rejected": true,
+          "reason": ""
+        },
+        "source_id": {
+          "rejected": true,
+          "reason": ""
+        },
+        "early_source_response": {
+          "rejected": true,
+          "reason": ""
+        },
+        "axi_read_byte": {
+          "rejected": true,
+          "reason": "RDATA mismatch at 0x90000000"
+        },
+        "wave_data_bit": {
+          "rejected": true,
+          "reason": "VCD handshakes differ from C++ monitor CSV"
+        },
+        "report_bad_source": {
+          "rejected": true,
+          "reason": "Command '['coralnpu/.cache/tools/toolchain/bin/python', 'coralnpu/runtime/verify.py', 'coralnpu/.cache/tools/tmp/coralnpu-report-negative-xgtwgoee/run']' returned non-zero exit status 1."
+        },
+        "report_bad_config": {
+          "rejected": true,
+          "reason": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+        }
+      }
+    },
+    "check_smoke_negative": {
+      "passed": true,
+      "checks": {
+        "wrong_input": {
+          "rejected": true,
+          "reason": "SMOKE observed bytes differ from independent input + 1"
+        },
+        "wrong_output": {
+          "rejected": true,
+          "reason": "SMOKE observed bytes differ from independent input + 1"
+        },
+        "wrong_readback": {
+          "rejected": true,
+          "reason": "SMOKE observed bytes differ from independent input + 1"
+        },
+        "missing_transaction": {
+          "rejected": true,
+          "reason": "SMOKE requires exactly four requests and four responses"
+        },
+        "extra_transaction": {
+          "rejected": true,
+          "reason": "SMOKE requires exactly four requests and four responses"
+        },
+        "reordered_transactions": {
+          "rejected": true,
+          "reason": "SMOKE operation/address differs"
+        },
+        "config_negative": {
+          "rejected": true,
+          "reason": "program.input must be an integer in [0, 4294967295]"
+        },
+        "config_overflow": {
+          "rejected": true,
+          "reason": "program.input must be an integer in [0, 4294967295]"
+        },
+        "config_boolean": {
+          "rejected": true,
+          "reason": "program.input must be an integer in [0, 4294967295]"
+        },
+        "config_uint32_boundaries": {
+          "passed": true
+        }
+      }
+    }
+  },
+  "cases": {
+    "smoke": {
+      "passed": true,
+      "cycles": 287,
+      "transactions": 4,
+      "output": 42,
+      "report": "user/smoke/result/test-20260925-180245/smoke/report.md"
+    },
+    "smoke_slow": {
+      "passed": true,
+      "cycles": 815,
+      "transactions": 4,
+      "output": 42,
+      "report": "user/smoke/result/test-20260925-180245/smoke_slow/report.md"
+    },
+    "llm": {
+      "passed": true,
+      "cycles": 320502,
+      "transactions": 7111,
+      "output": "blu",
+      "report": "user/llm/result/test-20260925-180245/llm/report.md"
+    },
+    "llm_slow": {
+      "passed": true,
+      "cycles": 461980,
+      "transactions": 7111,
+      "output": "blu",
+      "report": "user/llm/result/test-20260925-180245/llm_slow/report.md"
+    },
+    "llm_replay": {
+      "passed": true,
+      "cycles": 323741,
+      "transactions": 7111,
+      "output": "blu",
+      "report": "user/llm/result/test-20260925-180245/llm_replay/report.md"
+    },
+    "llm_backpressure": {
+      "passed": true,
+      "cycles": 247047,
+      "transactions": 7111,
+      "output": "blu",
+      "report": "user/llm/result/test-20260925-180245/llm_backpressure/report.md"
+    },
+    "llm_no_cache": {
+      "passed": true,
+      "cycles": 722751,
+      "transactions": 15746,
+      "output": "blu",
+      "report": "user/llm/result/test-20260925-180245/llm_no_cache/report.md"
+    },
+    "llm_long": {
+      "passed": true,
+      "cycles": 475020,
+      "transactions": 10243,
+      "output": ". t",
+      "report": "user/llm/result/test-20260925-180245/llm_long/report.md"
+    }
+  }
+}

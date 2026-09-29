@@ -1,1 +1,0 @@
-{"runtime":"standalone-systemc","device":"coralnpu","device_period_fs":2000000,"axi":{"base":2415919104,"size":805306368,"period":2000000,"outstanding":16,"planes":2,"replay":true,"stalls":true,"memsim_slots":8}}

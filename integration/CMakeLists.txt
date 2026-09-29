@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.20)
+project(coralnpu_storage LANGUAGES C CXX ASM)
+set(CMAKE_CXX_STANDARD 17)
+add_compile_options(-UNDEBUG)
+get_filename_component(PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+get_filename_component(STORAGE_ROOT "${PROJECT_ROOT}/${STORAGE_PATH}" ABSOLUTE)
+add_compile_definitions(AOU_LINK_LANES=${LINK_LANES} AOU_LINK_RATE_GTPS=${LINK_RATE_GTPS}
+  AOU_LINK_BITS_PER_SYMBOL=${LINK_BITS_PER_SYMBOL} AOU_LINK_TAT_NS=${LINK_TAT_NS})
+set(STORAGE_BUILD_CLI OFF CACHE BOOL "" FORCE)
+set(STORAGE_MEMSIM_LIBRARY "${PROJECT_ROOT}/coralnpu/.cache/build/memsim/libstoragestacked_memsim.so" CACHE FILEPATH "" FORCE)
+add_subdirectory("${STORAGE_ROOT}" storage)
+add_executable(coralnpu_sim main.cc axi_master.cc storage.cc)
+target_include_directories(coralnpu_sim PRIVATE . "${PROJECT_ROOT}/coralnpu/native")
+target_link_libraries(coralnpu_sim PRIVATE StorageStacked::axi
+  "${PROJECT_ROOT}/coralnpu/.cache/build/libcoralnpu-native.so")

@@ -1,7 +1,0 @@
-{
-  "name": "tiny_llm",
-  "model": "config/llm/tiny_char_v1.json",
-  "prompt": "red ",
-  "generated_tokens": 3,
-  "kv_cache": false
-}

@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "paths_relative_to": "repository root",
+  "source_base_commit": "8ce9c685ab2a648e48c340127854cb2dd843d785",
+  "working_tree_refactor": true,
+  "root_entries": [
+    "README.md",
+    "build.sh",
+    "user/",
+    "docs/",
+    "coralnpu/",
+    "integration/"
+  ],
+  "docs_empty": true,
+  "regression": {
+    "passed": true,
+    "device_cases": 8,
+    "native_memory_tests": 19,
+    "negative_and_boundary_checks": 33,
+    "report": "coralnpu/.cache/validation/test-20260925-180245/report.md"
+  },
+  "relative_path_relocation": {
+    "passed": true,
+    "tested_checkout": "../.coralnpu-relocation-check-20260925",
+    "launched_from": "..",
+    "storage": "../axi_StorageStacked",
+    "fresh_rebuild": true,
+    "library_isolation_checked": true,
+    "runtime_sources_equal": true,
+    "input": 41,
+    "output": 42,
+    "cycles": 287,
+    "transactions": 4,
+    "evidence": "coralnpu/.cache/validation/relocation-smoke",
+    "test_checkout_removed_after_archiving": true
+  },
+  "custom_project": {
+    "passed": true,
+    "input": 7,
+    "output": 24,
+    "wrong_expected_output_25_rejected": true,
+    "registration_changes_required": false,
+    "evidence": "coralnpu/.cache/validation/layout-custom/result"
+  },
+  "ucie_configuration": {
+    "layout-smoke": {
+      "ucie": {
+        "lanes": 16,
+        "rate_gtps": 24,
+        "bits_per_symbol": 1,
+        "tat_ns": 40
+      },
+      "output": 42,
+      "cycles": 287,
+      "report": "user/smoke/result/layout-smoke/report.md"
+    },
+    "layout-lanes8": {
+      "ucie": {
+        "lanes": 8,
+        "rate_gtps": 24,
+        "bits_per_symbol": 1,
+        "tat_ns": 40
+      },
+      "output": 42,
+      "cycles": 332,
+      "report": "user/smoke/result/layout-lanes8/report.md"
+    }
+  },
+  "shared_storage_smoke": {
+    "passed": true,
+    "transactions": 6,
+    "evidence": "../axi_StorageStacked/results/coral-layout-monitor-smoke"
+  },
+  "backup": "../.coralnpu-before-layout-20260925-173246",
+  "integration_layer": {
+    "files": [
+      "integration/CMakeLists.txt",
+      "integration/axi_master.cc",
+      "integration/axi_master.hh",
+      "integration/config.hh",
+      "integration/main.cc",
+      "integration/storage.cc",
+      "integration/storage.hh"
+    ],
+    "lines": 282,
+    "regression_passed": true,
+    "device_cases": 8,
+    "native_memory_tests": 19,
+    "negative_and_boundary_checks": 33,
+    "same_computation_and_timing_as_previous": true,
+    "report": "coralnpu/.cache/validation/test-20260925-183647/report.md",
+    "alternate_ucie_report": "user/smoke/result/integration-lanes8/report.md"
+  },
+  "shell_entry": {
+    "entry": "user/run.sh",
+    "stages": [
+      "make",
+      "simulate",
+      "validate"
+    ],
+    "launcher_checks_passed": 18,
+    "launcher_evidence": "coralnpu/.cache/validation/shell-entry/summary.json",
+    "regression_passed": true,
+    "device_cases": 8,
+    "native_memory_tests": 19,
+    "same_computation_and_timing_as_previous": true,
+    "report": "coralnpu/.cache/validation/test-20260925-190728/report.md"
+  }
+}
