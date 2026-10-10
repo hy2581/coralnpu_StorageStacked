@@ -11,7 +11,8 @@
     "outstanding": 16,
     "planes": 2,
     "stalls": true,
-    "replay": false
+    "replay": false,
+    "burst_beats": 4
   },
   "ucie": {
     "lanes": 16,

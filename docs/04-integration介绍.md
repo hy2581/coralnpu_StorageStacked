@@ -34,6 +34,9 @@ flowchart LR
 通过 `add_subdirectory` 使用公共存储源码，关闭公共项目的独立 CLI。
 把 `main.cc`、`axi_master.cc`、`storage.cc` 编译为 `coralnpu_sim`，
 链接 `StorageStacked::axi` 和 `libcoralnpu-native.so`。
+设备库在 `coralnpu/native/BUILD` 中固定定义 `ENABLE_RVV`，
+使 `CoreMiniAxiWrapper` 实例化 `VRvvCoreMiniAxi`，包含 RVV 执行后端。
+RVV 属于设备编译配置，不是用户 JSON 中的运行开关。
 编译出的文件放在 `coralnpu/.cache/build/`，由根目录构建入口和用户运行入口管理。
 
 ```mermaid
@@ -81,7 +84,7 @@ flowchart LR
 ## 4. axi_master.hh：设备主端的数据结构
 
 声明 `Master` 模块及其 AXI 主端端口。
-`Txn` 保存一笔请求的地址、16 字节数据、掩码、设备 ID、AXI ID 和时间。
+`Txn` 保存一笔请求的地址、16 字节数据、掩码、设备 ID、AXI ID、读写拍计数和时间。
 `active` 保存未完成请求，`awq/wq/arq` 管理通道队列，
 `order` 保证同一读写方向、同一设备 ID 的完成顺序。
 统计字段提供接收数、完成数、最大在途数和容量拒绝次数。
@@ -98,10 +101,13 @@ flowchart LR
 
 创建设备、加载 ELF，分别按设备时钟和 AXI 时钟推进。
 收到 16 字节对齐的设备请求后，分配空闲 AXI ID（1～1023），
-发出单拍 INCR 访问：`AxLEN=0`、`AxSIZE=4`。
+根据 `axi.burst_beats` 发出 INCR burst：`AxLEN=burst_beats-1`，
+每拍为 `16/burst_beats` 字节。默认 4 拍，因此 `AxLEN=3`、`AxSIZE=2`。
 
-16 字节设备数据按地址放到 32 字节 AXI 总线的对应字节位置，写掩码同步移动。
-收到 B/R 握手后，取出真实返回数据和响应状态，按设备 ID 顺序调用
+每一拍的数据按该拍地址放到 32 字节 AXI 总线的对应字节位置，写掩码同步移动。
+只有 W 握手成功才推进写拍计数；末拍置 WLAST，空闲时清零。
+读侧按 RID 独立收集所有拍，核对 RLAST 并累计响应状态。
+写侧等 B 握手、读侧等所有 R 握手后，按设备 ID 顺序调用
 `coralnpu_complete`。达到 `outstanding` 上限时停止接收新请求。
 
 `stalls=true` 会错开发送 AW/W，并周期性拉低 BREADY/RREADY，用于验证反压。
@@ -156,8 +162,9 @@ flowchart LR
 等存储返回后再把字节交回上游。一次调用发起请求，不代表数据已经返回。
 
 CoralNPU 原生接口一次交给桥一个 16 字节对齐的块。例如地址 `0x90000010`，
-它位于 32 字节 AXI 总线的后半部，lane=16。桥发 `ARLEN=0`、`ARSIZE=4`，
-等一拍 16 字节返回；从总线字节位置 16～31 取出数据，再按设备 ID 的顺序交回。
+默认桥发 `ARLEN=3`、`ARSIZE=2`，在四次 R 握手中分别读取总线 lane 16～19、
+20～23、24～27、28～31，收齐 16 字节后再按设备 ID 的顺序交回。
+原生 RTL 接口仍提交固定 16 字节请求；适配器实现窄拍 INCR 转换，不合并多个原生请求。
 AXI 返回已经到达后，可能仍需等待更早的同 ID 请求和下一次设备时钟。
 
 | 到哪个阶段 | 应观察什么 |

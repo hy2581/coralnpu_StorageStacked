@@ -19,7 +19,11 @@ def validate(c):
     keys(c['npu'], 'clock_mhz', 'npu')
     integer(c['npu']['clock_mhz'], 1, 10000, 'npu.clock_mhz')
     if 10**9 % c['npu']['clock_mhz']: raise ValueError('NPU period must be integral fs')
-    keys(c['axi'], 'period_ns outstanding planes stalls replay', 'axi')
+    if not isinstance(c['axi'],dict): raise ValueError('axi must be an object')
+    keys({k:v for k,v in c['axi'].items() if k!='burst_beats'}, 'period_ns outstanding planes stalls replay', 'axi')
+    beats=c['axi'].get('burst_beats',4)
+    if type(beats) is not int or beats not in (1,2,4,8,16):
+        raise ValueError('axi.burst_beats must be 1, 2, 4, 8 or 16')
     for k, hi in [('period_ns',1000), ('outstanding',128), ('planes',4)]: integer(c['axi'][k],1,hi,'axi.'+k)
     for k in ('stalls','replay'):
         if type(c['axi'][k]) is not bool: raise ValueError('axi.'+k+' must be boolean')
@@ -63,7 +67,7 @@ def load_config(path):
     return validate(json.loads(Path(path).read_text()))
 
 def resolved_parts(c):
-    a={'device_clock_mhz':c['npu']['clock_mhz'],'axi':c['axi'],'memory':c['memsim'],'max_ticks':c['simulation']['max_ticks'],'ucie':c['ucie']}
+    a={'device_clock_mhz':c['npu']['clock_mhz'],'axi':{'burst_beats':4,**c['axi']},'memory':c['memsim'],'max_ticks':c['simulation']['max_ticks'],'ucie':c['ucie']}
     b={'name':c['program']['type'],**{k:v for k,v in c['program'].items() if k!='type'}}
     return a,b
 

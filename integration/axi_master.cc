@@ -8,6 +8,10 @@ Master::Master(sc_module_name name,const ConfigParams& p):sc_module(name),config
  nativeClock("npu_clock",sc_time::from_value(p.device_period)),
  trace(p.trace_dir+"/transactions.csv"),source(p.trace_dir+"/npu_requests.csv") {
     if(!trace || !source) throw std::runtime_error("Cannot open native request logs");
+    if(!p.burst_beats || p.burst_beats>16 || (p.burst_beats&(p.burst_beats-1)))
+        throw std::invalid_argument("axi.burst_beats must be 1, 2, 4, 8 or 16");
+    beatBytes=16/p.burst_beats;
+    while((1u<<beatSize)<beatBytes) ++beatSize;
     trace<<"id,command,address,bytes,begin_tick,accepted_tick,axi_done_tick,end_resp_tick,segments,requestor,stream,substream,status\n";
     source<<"event,tick,sequence,command,address,native_id,wire_id,data,mask,response\n";
     device=coralnpu_create([](void* p,uint64_t seq,uint32_t addr,uint8_t id,int write,const uint8_t* data,uint16_t mask){
@@ -60,32 +64,43 @@ void Master::nativeTick() {
 }
 void Master::tick() {
     ++cycle;
-    if(!resetn.read()) {axi.awvalid=false;axi.wvalid=false;axi.arvalid=false;axi.rready=false;axi.bready=false;return;}
+    if(!resetn.read()) {axi.awvalid=false;axi.wvalid=false;axi.wlast=false;axi.arvalid=false;axi.rready=false;axi.bready=false;return;}
     if(axi.awvalid.read() && axi.awready.read()){sc_assert(!awq.empty());awq.pop_front();}
-    if(axi.wvalid.read() && axi.wready.read()){sc_assert(!wq.empty());wq.pop_front();}
+    if(axi.wvalid.read() && axi.wready.read()){
+        sc_assert(!wq.empty());auto& t=active.at(wq.front());
+        sc_assert(t.wbeat<config.burst_beats);
+        if(++t.wbeat==config.burst_beats) wq.pop_front();
+    }
     if(axi.arvalid.read() && axi.arready.read()){sc_assert(!arq.empty());arq.pop_front();}
     if(axi.rvalid.read() && axi.rready.read()) {
-        auto& t=active.at(axi.rid.read().to_uint());sc_assert(!t.write && !t.ready && axi.rlast.read());
-        unsigned lane=t.address%32;auto data=axi.rdata.read();
-        for(unsigned j=0;j<16;++j)t.data[j]=data.range(8*(lane+j)+7,8*(lane+j)).to_uint();
-        t.response=axi.rresp.read().to_uint();t.ready=true;t.axiDone=sc_time_stamp().value();
+        auto& t=active.at(axi.rid.read().to_uint());
+        sc_assert(!t.write && !t.ready && t.rbeat<config.burst_beats);
+        sc_assert(axi.rlast.read()==(t.rbeat+1==config.burst_beats));
+        const unsigned offset=t.rbeat*beatBytes,lane=(t.address+offset)%32;
+        auto data=axi.rdata.read();
+        for(unsigned j=0;j<beatBytes;++j)t.data[offset+j]=data.range(8*(lane+j)+7,8*(lane+j)).to_uint();
+        t.response|=axi.rresp.read().to_uint();
+        if(++t.rbeat==config.burst_beats){t.ready=true;t.axiDone=sc_time_stamp().value();}
     }
     if(axi.bvalid.read() && axi.bready.read()) {
-        auto& t=active.at(axi.bid.read().to_uint());sc_assert(t.write && !t.ready);
+        auto& t=active.at(axi.bid.read().to_uint());
+        sc_assert(t.write && !t.ready && t.wbeat==config.burst_beats);
         t.response=axi.bresp.read().to_uint();t.ready=true;t.axiDone=sc_time_stamp().value();
     }
     drive();
 }
 void Master::drive() {
     axi.awvalid=false;
-    if(!awq.empty()){const auto& t=active.at(awq.front());axi.awaddr=t.address;axi.awid=t.id;axi.awlen=0;axi.awsize=4;axi.awburst=1;axi.awvalid=cycle>=t.awAfter;}
+    if(!awq.empty()){const auto& t=active.at(awq.front());axi.awaddr=t.address;axi.awid=t.id;axi.awlen=config.burst_beats-1;axi.awsize=beatSize;axi.awburst=1;axi.awvalid=cycle>=t.awAfter;}
     axi.arvalid=false;
-    if(!arq.empty()){const auto& t=active.at(arq.front());axi.araddr=t.address;axi.arid=t.id;axi.arlen=0;axi.arsize=4;axi.arburst=1;axi.arvalid=true;}
-    axi.wvalid=false;
+    if(!arq.empty()){const auto& t=active.at(arq.front());axi.araddr=t.address;axi.arid=t.id;axi.arlen=config.burst_beats-1;axi.arsize=beatSize;axi.arburst=1;axi.arvalid=true;}
+    axi.wvalid=false;axi.wlast=false;
     if(!wq.empty()){
-        const auto& t=active.at(wq.front());Data data=0;unsigned lane=t.address%32;
-        for(unsigned j=0;j<16;++j)data.range(8*(lane+j)+7,8*(lane+j))=t.data[j];
-        axi.wdata=data;axi.wstrb=uint32_t(t.mask)<<lane;axi.wlast=true;axi.wvalid=cycle>=t.wAfter;
+        const auto& t=active.at(wq.front());Data data=0;
+        const unsigned offset=t.wbeat*beatBytes,lane=(t.address+offset)%32;
+        for(unsigned j=0;j<beatBytes;++j)data.range(8*(lane+j)+7,8*(lane+j))=t.data[offset+j];
+        const uint32_t mask=(uint32_t(t.mask)>>offset)&((1u<<beatBytes)-1);
+        axi.wdata=data;axi.wstrb=mask<<lane;axi.wlast=t.wbeat+1==config.burst_beats;axi.wvalid=cycle>=t.wAfter;
     }
     axi.rready=!config.stalls || cycle%7>=3;
     axi.bready=!config.stalls || cycle%5>=2;

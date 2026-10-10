@@ -71,7 +71,10 @@ flowchart TD
     J --> K["result/：文本、token、时间和原始证据"]
 ```
 
-计算在 CoralNPU RTL 执行的 RV32 标量 FP32 程序中完成。
+计算在启用 RVV 的 `RvvCoreMiniAxi` RTL 中完成，设备程序按 `rv32imf_zve32f_zicsr_zifencei` 编译。
+`linear()` 使用 RVV FP32：每个 lane 计算一个输出列，读取连续权重，按输入行顺序分别乘法、加法。
+循环使用实际 VL 分块，17 列词表投影的最后一块也会处理；不使用融合乘加，以保留参考实现的舍入顺序。
+LayerNorm、注意力、Softmax 与生成控制保持标量计算。
 权重、KV、token 和观测记录走外部 AXI → UCIe → MEMSIM；局部临时数组由设备程序使用。
 
 ## 4. 输出看哪里
@@ -81,6 +84,7 @@ flowchart TD
 | 文件 | 内容 |
 |---|---|
 | `report.md` | 输入文本、生成文本、token ID、周期和阶段时间 |
+| `build/program.dis` | ELF 反汇编；编译时检查向量配置、加载、乘法、加法和存储指令 |
 | `llm_summary.json` | 独立数值误差、KV 检查、访存分布和逐 token 时间 |
 | `summary.json` | 全部检查的最终结论，要求 `passed=true` |
 | `input.json` / `resolved.json` | 用户本次保存的配置／实际运行配置和模型信息 |
@@ -88,11 +92,14 @@ flowchart TD
 | `ucie_flits.csv` / `memsim_bridge.csv` | 链路传输与内存请求返回 |
 
 独立参考根据 ELF 中的实际模型信息核对权重、K/V、中间结果和生成 token。
-设备完成状态、数值校验、AXI／Flit／内存检查都通过，最终才会显示 PASS。
+每个前向位置执行 7 次 RVV 线性层；默认输入共执行 42 次，设备通过 `report[9]` 写出计数，
+校验器核对实际记录，`llm_summary.json.execution` 保存执行信息。
+设备完成状态、RVV 计数、数值校验、AXI／Flit／内存检查都通过，最终才会显示 PASS。
 这是小型功能验证模型；报告时间包含观测记录的访存开销。
 
-需要对照不同配置时，在 `user/` 中执行 `./run.sh llm --test`。
-它运行默认、慢内存、链路重放、反压、关闭 KV cache、长输入六个场景。
+在 `user/` 中执行 `./run.sh llm --test`，默认 LLM 场景只运行一次，
+并执行原生内存、在线 C ABI、独立数值与链路验收以及错误拒绝检查。
+需要对照其他配置时，按 [配置实验说明](05-配置实验与USER负载详解.md) 保存实验 JSON 并单独运行。
 
 ## 跟着默认输入看字符怎样生成
 

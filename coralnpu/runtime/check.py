@@ -18,4 +18,6 @@ for artifact in artifacts:
         assert p.is_relative_to(ROOT) or str(p).startswith(('/lib/','/lib64/','/usr/lib/')),target
     symbols=subprocess.check_output(['nm','-C',relative(artifact)],cwd=ROOT,text=True)
     assert 'gem5::' not in symbols and 'sc_core::' not in symbols
+    if artifact.name=='libcoralnpu-native.so':
+        assert 'VRvvCoreMiniAxi::' in symbols, 'Rebuild the native library with RVV enabled'
 print('环境与库隔离检查通过；计算验收需要实际运行用户项目。')

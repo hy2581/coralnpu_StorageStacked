@@ -14,7 +14,7 @@ def write_report(root):
                   '| 场景 | 输出 | NPU 周期 | 外部事务 | 报告 |', '|---|---|---:|---:|---|']
         for name, case in s['cases'].items():
             lines.append(f"| {name} | {case['output']} | {case['cycles']} | {case['transactions']} | [查看]({name}/report.md) |")
-        lines += ['', '各场景目录保存实际配置与原始证据；总摘要包含慢内存及 KV cache 对照结果。']
+        lines += ['', '每个项目的默认场景运行一次；各目录保存实际配置与原始证据。']
     else:
         b = s['benchmark']
         c = json.loads((root / 'resolved.json').read_text())
@@ -25,6 +25,10 @@ def write_report(root):
                   f"{a['memory']['standard'].upper()} × {a['memory']['channels']} 通道，时序倍率 {a['memory']['scale']}。", '',
                   f"NPU 周期：{s['devices']['cycles']}；外部事务：{source['transactions']}；"
                   f"平均往返：{source['roundtrip_mean_ns']:.3f} ns。", '']
+        if 'axi_burst' in s:
+            burst=s['axi_burst']
+            lines += [f"AXI INCR burst：每请求 {burst['beats_per_request']} 拍，每拍 {burst['bytes_per_beat']} 字节；"
+                      f"写 {burst['write_bursts']} 笔 / {burst['write_beats']} 拍，读 {burst['read_bursts']} 笔 / {burst['read_beats']} 拍。", '']
         if b['name'] == 'smoke':
             r = s['smoke']
             lines += [f"输入 **{r['input']}** → 加一 → 输出 **{r['output']}**；独立期望 **{r['expected_output']}**（uint32 回绕）。", '',
@@ -42,7 +46,8 @@ def write_report(root):
                       f"| 初始化 | {t['initialization_ns']:.3f} |",
                       f"| Prefill 至首 token | {t['prefill_to_first_token_ns']:.3f} |",
                       f"| 推理至最后一个 token | {t['inference_to_last_token_ns']:.3f} |", '',
-                      '时间包含观测记录开销；prefill/decode 不含初始化。此标量 FP32 字符模型用于功能验证。',
+                      f"RVV FP32 线性层执行 {r['execution']['rvv_linear_calls']} 次；归一化与注意力使用标量 FP32。",
+                      '时间包含观测记录开销；prefill/decode 不含初始化。此字符模型用于功能验证。',
                       '数值误差、KV、访存分布与逐 token 时间见 [llm_summary.json](llm_summary.json)。']
         else:
             lines += ['输出字校验通过：`'+json.dumps(b['expect'], ensure_ascii=False)+'`。']

@@ -2,7 +2,12 @@
 
 阅读入口：[文档目录](docs/README.md) · [逐文件中文讲解](https://github.com/hy2581/StorageStacked-docs)。
 
-在 CoralNPU RTL 中执行用户程序，通过 AXI256、UCIe 访问在线 MEMSIM。
+离线 Docker 包及最新兼容脚本见 [离线发布仓库](https://github.com/hy2581/zhongxing-storagestacked-offline)。
+旧版 Docker 编译出现 `posix_spawn failed: Operation not permitted` 时，按
+[Docker 兼容说明](https://github.com/hy2581/zhongxing-storagestacked-offline/blob/main/DOCKER_COMPATIBILITY.md)
+使用临时入口；源码和文档可通过该入口的 `shell` 命令查看。
+
+在启用 RVV 的 `RvvCoreMiniAxi` RTL 中执行用户程序，通过 AXI256、UCIe 访问在线 MEMSIM。
 用户只需操作根目录 `build.sh` 和 `user/`；`coralnpu/` 提供设备、工具及运行支持。
 
 ```text
@@ -71,14 +76,18 @@ user/llm/
 |---|---|
 | `program` | SMOKE 的 input；LLM 的 prompt、generated_tokens、kv_cache |
 | `npu` | clock_mhz |
-| `axi` | period_ns、outstanding、planes、stalls、replay |
+| `axi` | period_ns、outstanding、burst_beats、planes、stalls、replay |
 | `ucie` | lanes、rate_gtps、bits_per_symbol（1 或 2）、tat_ns |
 | `memsim` | standard、channels、scale、queue、slots、response_hold |
 | `simulation` | max_ticks，单位 fs |
 
 编译期 UCIe 参数改变时自动构建对应运行器；其他运行参数直接传递。
+`axi.burst_beats` 可取 1、2、4、8、16，默认 4。适配器将每个原生 16 字节请求
+转换成一个 INCR burst；默认 4 拍、每拍 4 字节，`AWLEN/ARLEN=3`，只在末拍置 LAST。
+这是对原生请求的窄拍转换；多个原生请求的合并与宽拍带宽优化尚未实现。
 不支持的字段或参数会被拒绝。更深层 DRAM 参数需要扩展公共存储接口后才能使用。
 TinyLLM 固定为单层、8 维、2 个注意力头、16 维 FFN、16 字符上下文的 FP32 功能模型。
+线性层使用 RVV FP32，LayerNorm、注意力与生成控制使用标量 FP32；RVV 为固定启用的设备构建配置。
 `tinyllm.h` 是模型数据来源；用于独立参考校验的模型快照随 ELF 保存。
 
 ## 结果与复验
@@ -97,16 +106,19 @@ TinyLLM 固定为单层、8 维、2 个注意力头、16 维 FFN、16 字符上�
 ./build.sh --test
 ```
 
-完整回归包含 2 个 SMOKE、6 个 LLM 场景、原生内存测试、在线 C ABI 和错误拒绝检查。
+完整回归执行一次：SMOKE 和 LLM 各运行一个默认场景，再执行原生内存测试、在线 C ABI 和错误拒绝检查。
+全套回归还执行 `user/burst` 的 1、2、4、8、16 拍场景，检查字节掩码、两组总线 lane、
+4 KiB 边界附近的访问、反压和重放；16 拍场景使用在途上限 1。
+`./run.sh llm --test` 只运行一次默认 LLM 仿真，并完成相关验收。
 各场景结果留在所属项目的 result/，全套验收索引由内部测试工具保存。
-历史运行结果见 [2026-09-25 验收记录](coralnpu/validation/2026-09-25-user-layout/README.md)；当前运行以新生成的 `summary.json` 为准。
+RVV 与单次回归的验收说明见 [验收记录](coralnpu/validation/2026-10-08-rvv/README.md)；运行结论以本次生成的 `summary.json` 为准。
 
 ## 添加自己的项目
 
 复制 `user/smoke/` 的 config.json 与 src/ 到新的项目目录，修改源码和配置，然后执行
 `./run.sh 新项目名`。入口按目录发现项目，无需注册名称或修改黑盒。
 Makefile 使用 `coralnpu/sdk/app.mk`，声明 `SOURCES`；编译产物必须为 `$(OUT)/program.elf`。
-设备程序使用 RV32 标量指令，成功写 mailbox `0xc0000000=0x600d0000`，然后执行 `wfi`。
+设备程序按 `rv32imf_zve32f_zicsr_zifencei` 编译，支持标量与 RVV FP32 指令，成功写 mailbox `0xc0000000=0x600d0000`，然后执行 `wfi`。
 外部存储地址窗口是 `0x90000000` 至 `0xbfffffff`。
 
 自定义计算使用 `program.type="custom"`，`defines` 提供整数宏（源码中加 `APP_` 前缀），

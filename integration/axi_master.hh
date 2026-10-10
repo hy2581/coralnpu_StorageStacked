@@ -27,12 +27,14 @@ class Master : public sc_core::sc_module {
         uint8_t nativeId, response=0;
         bool write, ready=false;
         std::array<uint8_t,16> data{};
+        unsigned wbeat=0, rbeat=0;
         uint64_t awAfter, wAfter;
     };
     ConfigParams config;
     coralnpu_handle device=nullptr;
     sc_core::sc_clock nativeClock;
     uint16_t nextId=1;
+    unsigned beatBytes=0, beatSize=0;
     std::map<uint16_t,Txn> active;
     std::map<std::pair<bool,uint8_t>,std::deque<uint16_t>> order;
     std::deque<uint16_t> awq,wq,arq;

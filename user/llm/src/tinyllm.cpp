@@ -4,6 +4,7 @@
 #include "project_config.h"
 #include <cmath>
 #include <cstdint>
+#include <riscv_vector.h>
 
 static volatile float *const weights = reinterpret_cast<volatile float *>(0x90000000u);
 static volatile float *const keys = reinterpret_cast<volatile float *>(0x90010000u);
@@ -12,6 +13,7 @@ static volatile float *const trace = reinterpret_cast<volatile float *>(0x900300
 static volatile uint32_t *const tokens = reinterpret_cast<volatile uint32_t *>(0x90040000u);
 static volatile uint32_t *const report = reinterpret_cast<volatile uint32_t *>(0x90050000u);
 static uint32_t errors = 0, calls = 0;
+static uint32_t rvv_linear_calls = 0;
 
 // 保存中间结果，供主机上的独立参考实现核对。
 static void dump(unsigned pos, unsigned offset, const float *data, unsigned count) {
@@ -32,14 +34,27 @@ static void norm(const float *x, float *y, unsigned scale, unsigned bias) {
     for (unsigned i = 0; i < LLM_DIM; ++i)
         y[i] = (x[i] - mean) * inv * weights[scale + i] + weights[bias + i];
 }
-// 线性层：向量乘权重矩阵，可附加偏置。
+// RVV FP32 线性层：每个 lane 计算一个输出列，按输入行顺序累加。
+// 乘法和加法分开执行，保留独立参考的 FP32 舍入顺序。
 static void linear(const float *x, float *y, unsigned rows, unsigned cols, unsigned matrix,
                    int bias = -1) {
-    for (unsigned j = 0; j < cols; ++j) {
-        float sum = 0.0f;
-        for (unsigned i = 0; i < rows; ++i)
-            sum += x[i] * weights[matrix + i * cols + j];
-        y[j] = sum + (bias >= 0 ? weights[bias + j] : 0.0f);
+    ++rvv_linear_calls;
+    for (unsigned j = 0; j < cols;) {
+        const size_t vl = __riscv_vsetvl_e32m1(cols - j);
+        auto sum = __riscv_vfmv_v_f_f32m1(0.0f, vl);
+        for (unsigned i = 0; i < rows; ++i) {
+            const auto row = __riscv_vle32_v_f32m1(
+                const_cast<const float *>(weights + matrix + i * cols + j), vl);
+            const auto product = __riscv_vfmul_vf_f32m1(row, x[i], vl);
+            sum = __riscv_vfadd_vv_f32m1(sum, product, vl);
+        }
+        if (bias >= 0) {
+            const auto offset = __riscv_vle32_v_f32m1(
+                const_cast<const float *>(weights + bias + j), vl);
+            sum = __riscv_vfadd_vv_f32m1(sum, offset, vl);
+        }
+        __riscv_vse32_v_f32m1(y + j, sum, vl);
+        j += vl;
     }
 }
 // 处理一个 token 位置：Embedding → 注意力 → FFN → 输出分数。
@@ -163,6 +178,8 @@ int main() {
     }
     // 3. 写入完成状态；结果和完整链路仍由独立校验器验收。
     report[8] = errors;
+    // 记录实际执行的 RVV 线性层次数，供独立校验器核对。
+    report[9] = rvv_linear_calls;
     report[2] = 2;
     *reinterpret_cast<volatile uint32_t *>(0xc0000000u) = errors ? 0xbad00000u : 0x600d0000u;
     asm volatile("wfi");

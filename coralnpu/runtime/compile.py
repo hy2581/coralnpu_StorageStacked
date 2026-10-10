@@ -46,14 +46,25 @@ else:
     header += ['#define APP_'+k+' '+str(v)+'u' for k,v in b['defines'].items()]
 (stage/'project_config.h').write_text('\n'.join(header)+'\n')
 headers=[str(f.relative_to(stage)) for f in stage.rglob('*') if f.suffix in ('.h','.hh','.hpp')]
-build='load("//rules:coralnpu_v2.bzl", "coralnpu_v2_binary")\ncoralnpu_v2_binary(name="program", srcs='+repr(o.sources+headers)+', stack_size_bytes=4096, enable_vmem=False, copts=["-Os", "-fno-tree-vectorize", "-fno-tree-slp-vectorize", "-ffp-contract=off", "-march=rv32imf_zicsr_zifencei"])\n'
+build='load("//rules:coralnpu_v2.bzl", "coralnpu_v2_binary")\ncoralnpu_v2_binary(name="program", srcs='+repr(o.sources+headers)+', stack_size_bytes=4096, enable_vmem=False, copts=["-Os", "-fno-tree-vectorize", "-fno-tree-slp-vectorize", "-ffp-contract=off", "-march=rv32imf_zve32f_zicsr_zifencei"])\n'
 build=build.replace('copts=[', 'copts=['+repr('-ffile-prefix-map='+str(ROOT)+'=.')+', ')
+if model:
+    build+='genrule(name="program_disassembly", srcs=[":program.elf"], outs=["program.dis"], tools=["@toolchain_coralnpu_v2//:bin/llvm-objdump"], cmd="$(location @toolchain_coralnpu_v2//:bin/llvm-objdump) --disassemble $< > $@")\n'
 (stage/'BUILD').write_text(build)
-bazel('build',['//sdk/staging:program.elf'])
-files=bazel('cquery',['//sdk/staging:program.elf'],capture=True).splitlines()
+targets=['//sdk/staging:program.elf']
+if model:targets.append('//sdk/staging:program_disassembly')
+bazel('build',targets)
+files=bazel('cquery',['set('+' '.join(targets)+')'],capture=True).splitlines()
 elf=next(ROOT/'coralnpu'/f for f in files if f.endswith('/program.elf'))
 (out/'program.elf').unlink(missing_ok=True)
 shutil.copy2(elf,out/'program.elf')
 (out/'program.elf').chmod(0o755)
-if model:attach(out/'program.elf',model)
+if model:
+    disassembly=next(ROOT/'coralnpu'/f for f in files if f.endswith('/program.dis'))
+    instructions=disassembly.read_text()
+    for mnemonic in ('vsetvli','vle32.v','vfmul.vf','vfadd.vv','vse32.v'):
+        if not re.search(r'\s'+re.escape(mnemonic)+r'\s',instructions):
+            raise ValueError('Missing RVV instruction in TinyLLM ELF: '+mnemonic)
+    shutil.copy2(disassembly,out/'program.dis')
+    attach(out/'program.elf',model)
 print('Built program.elf')

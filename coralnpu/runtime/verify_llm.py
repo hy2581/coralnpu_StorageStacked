@@ -33,7 +33,7 @@ def check_observations(c, source):
         for name,info in traces.items():
             for j,value in enumerate(r[name]):add(TRACE+4*(pos*stride+info['offset']+j),[value]*visits[pos],name)
     for i,token in enumerate(ref['tokens']):add(TOKENS+4*i,[token],'token_input')
-    reports={0:0x4c4c4d31,1:1,2:2,8:0}
+    reports={0:0x4c4c4d31,1:1,2:2,8:0,9:7*calls}
     for step,token in enumerate(ref['generated']):
         reports.update({16+step:token,32+step:0x70000000+step,64+step:0x71000000+step,96+step:expected_calls[step]})
     for i,value in reports.items():add(REPORT+4*i,[value],'report')
@@ -85,6 +85,7 @@ def check_observations(c, source):
     return {'passed':True,'model_version':m['version'],'model_parameters':sum(len(t['data']) for t in m['tensors'].values()),
             'architecture':m['architecture'],'prompt':b['prompt'],'prompt_tokens':prompt,
             'generated_token_ids':ref['generated'],'generated_text':ref['text'],'kv_cache':b['kv_cache'],
+            'execution':{'core':'RvvCoreMiniAxi','linear':'RVV FP32','rvv_linear_calls':7*calls},
             'processed_token_positions':p+g-1,'forward_calls':calls,'verified_float_writes':sum(observed[a] for a in expected if kind[a] not in ('weight','report','token_input')),
             'numeric_tolerance':{'absolute':ABS_TOL,'relative':REL_TOL},'maximum_absolute_error_by_stage':dict(max_error),
             'traffic':{k:dict(v) for k,v in traffic.items()},'weight_tensor_reads':dict(tensor_reads),
@@ -95,7 +96,7 @@ def check_observations(c, source):
                       'inference_to_last_token_ns':(ready[-1]-starts[0])/1e6,
                       'phase_duration_ns':[(ends[i]-starts[i])/1e6 for i in range(g)],
                       'scope':'RTL simulation including observation/marker traffic; excludes model staging and startup from prefill/decode'},
-            'scope':'Trained miniature character decoder functional benchmark; scalar FP32, one layer, no general-language quality claim'}
+            'scope':'Trained miniature character decoder functional benchmark; RVV FP32 linear layers with scalar normalization/attention, one layer, no general-language quality claim'}
 
 def verify_llm(root,c):
     with (root/'npu_requests.csv').open() as stream:source=list(csv.DictReader(stream))

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Independent transaction, source, byte, compute and waveform acceptance."""
 import csv
+import collections
 import json
 from pathlib import Path
 import re
@@ -30,6 +31,8 @@ def verify(root):
     assert actual_axi['period'] == a['axi']['period_ns'] * 1000000
     assert actual_axi['planes'] == a['axi']['planes']
     assert actual_axi['outstanding'] == a['axi']['outstanding']
+    burst_beats=a['axi'].get('burst_beats',1)
+    assert actual_axi.get('burst_beats',1) == burst_beats
     assert actual_axi['replay'] == a['axi']['replay']
     assert actual_axi['memsim_slots'] == a['memory']['slots']
     checks = {k: read(root / (k + '.json')) for k in ('check_summary', 'aou_check_summary', 'memsim_check', 'memsim_core')}
@@ -48,8 +51,13 @@ def verify(root):
     events = rows('axi_events.csv')
     aw = [r for r in events if r['channel'] == 'AW']
     ws = [r for r in events if r['channel'] == 'W']
-    assert len(aw) == len(ws)
-    writes_by_key = {(r['id'], int(r['tick'])): w for r, w in zip(aw, ws)}
+    write_beats=collections.deque(ws)
+    writes_by_key={}
+    for address in aw:
+        count=int(address['len'])+1
+        assert len(write_beats)>=count, 'Missing W beat'
+        writes_by_key[address['id'],int(address['tick'])]=[write_beats.popleft() for _ in range(count)]
+    assert not write_beats, 'Orphan W beat'
     channels = {ch: {} for ch in ('AW', 'AR', 'B', 'R')}
     for e in events:
         if e['channel'] in channels:
@@ -67,16 +75,30 @@ def verify(root):
         ch = 'AW' if req['command'] == 'W' else 'AR'
         address = [e for e in channels[ch][t['id']] if begin < int(e['tick']) <= int(t['axi_done_tick'])]
         assert len(address) == 1 and address[0]['address'] == req['address']
+        address=address[0]
+        count=int(address['len'])+1; width=1<<int(address['size'])
+        assert count==burst_beats and count*width==16, 'AXI burst geometry differs from native request'
         ch = 'B' if req['command'] == 'W' else 'R'
-        reply = [e for e in channels[ch][t['id']] if int(e['tick']) == int(t['axi_done_tick'])]
-        assert len(reply) == 1 and int(reply[0]['resp']) == 0
+        reply = [e for e in channels[ch][t['id']] if begin < int(e['tick']) <= int(t['axi_done_tick'])]
+        assert len(reply) == (1 if ch=='B' else count) and int(reply[-1]['tick'])==int(t['axi_done_tick'])
+        assert all(int(e['resp'])==0 for e in reply)
         if req['command'] == 'W':
-            w = writes_by_key[t['id'], int(address[0]['tick'])]
-            assert int(w['strb']) == int(req['mask']) << lane
-            assert int(w['data']).to_bytes(32, 'little')[lane:lane+16] == bytes.fromhex(req['data'])
+            beats=writes_by_key[t['id'],int(address['tick'])]
+            payload=bytes.fromhex(req['data'])
+            for index,w in enumerate(beats):
+                offset=index*width;lane=(int(req['address'])+offset)%32
+                assert int(w['last'])==int(index==count-1), 'Incorrect WLAST'
+                assert begin<int(w['tick'])<int(reply[0]['tick']), 'W beat outside native request lifetime'
+                mask=(int(req['mask'])>>offset)&((1<<width)-1)
+                assert int(w['strb'])==mask<<lane, 'Write byte enables differ'
+                assert int(w['data']).to_bytes(32,'little')[lane:lane+width]==payload[offset:offset+width], 'Write beat bytes differ'
             assert rsp['data'] == req['data']
         else:
-            assert int(reply[0]['data']).to_bytes(32, 'little')[lane:lane+16] == bytes.fromhex(rsp['data'])
+            payload=bytes.fromhex(rsp['data'])
+            for index,r in enumerate(reply):
+                offset=index*width;lane=(int(req['address'])+offset)%32
+                assert int(r['last'])==int(index==count-1), 'Incorrect RLAST'
+                assert int(r['data']).to_bytes(32,'little')[lane:lane+width]==payload[offset:offset+width], 'Read beat bytes differ'
         latency.append(end - begin)
     protocol = read(root / 'protocol_summary.json')
     assert latency and protocol['max_outstanding'] <= a['axi']['outstanding']
@@ -115,7 +137,11 @@ def verify(root):
                     seen.append(int.from_bytes(bytes.fromhex(row['data'])[lane:lane+4],'little'))
             assert seen and seen[-1]==e['value'], f'Expected output mismatch at {address:#x}'
         devices.update(checked_output_words=len(b['expect']),mailbox=completion['mailbox'])
-    result = {'passed': True, 'device': dev, 'benchmark': b, 'axi_data_bits': read(root / 'protocol_summary.json')['axi_data_bits'], 'completion': completion, 'sources': sources, 'devices': devices, 'checks': checks, 'wave': wave, 'scope': 'CoralNPU RTL callbacks -> bounded AXI256 adapter -> AXI2Flit -> UCIe -> online mem_sim -> returned data'}
+    burst_summary={'beats_per_request':burst_beats,'bytes_per_beat':16//burst_beats,
+                   'write_bursts':len(aw),'write_beats':len(ws),
+                   'read_bursts':sum(e['channel']=='AR' for e in events),
+                   'read_beats':sum(e['channel']=='R' for e in events)}
+    result = {'passed': True, 'device': dev, 'benchmark': b, 'axi_data_bits': read(root / 'protocol_summary.json')['axi_data_bits'], 'completion': completion, 'sources': sources, 'devices': devices, 'checks': checks, 'wave': wave, 'axi_burst':burst_summary, 'scope': 'CoralNPU RTL callbacks -> bounded AXI256 INCR burst adapter -> AXI2Flit -> UCIe -> online mem_sim -> returned data'}
     if b['name'] == 'tiny_llm':
         result['llm'] = llm
     if b['name'] == 'smoke':

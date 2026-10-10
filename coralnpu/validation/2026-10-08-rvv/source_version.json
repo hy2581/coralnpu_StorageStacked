@@ -1,0 +1,24 @@
+{
+  "base_commit": "28a0f7c550d588ce5e94d58fda5a8afc3d5dda92",
+  "uses_working_tree_changes": true,
+  "command": "./build.sh --test",
+  "run": "test-20261008-164539",
+  "files": [
+    {
+      "name": "input.json",
+      "bytes": 556
+    },
+    {
+      "name": "llm_summary.json",
+      "bytes": 2787
+    },
+    {
+      "name": "program.dis",
+      "bytes": 44948
+    },
+    {
+      "name": "summary.json",
+      "bytes": 5590
+    }
+  ]
+}

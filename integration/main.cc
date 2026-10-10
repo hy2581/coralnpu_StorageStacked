@@ -18,6 +18,7 @@ int sc_main(int argc,char** argv) {
         p.period=a.get<uint64_t>("axi.period_ns")*1000000;
         p.device_period=1000000000/a.get<unsigned>("device_clock_mhz");
         p.max_ticks=a.get<uint64_t>("max_ticks");p.outstanding=a.get<unsigned>("axi.outstanding");
+        p.burst_beats=a.get<unsigned>("axi.burst_beats",4);
         p.planes=a.get<unsigned>("axi.planes");p.stalls=a.get<bool>("axi.stalls");p.replay=a.get<bool>("axi.replay");
         p.memsim_channels=a.get<unsigned>("memory.channels");p.memsim_scale=a.get<unsigned>("memory.scale");
         p.memsim_slots=a.get<unsigned>("memory.slots");p.memsim_queue=a.get<unsigned>("memory.queue");
@@ -35,7 +36,7 @@ int sc_main(int argc,char** argv) {
         std::ofstream config(directory+"/config.json");
         config<<"{\"runtime\":\"standalone-systemc\",\"device\":\"coralnpu\",\"device_period_fs\":"<<p.device_period
               <<",\"axi\":{\"base\":"<<p.base<<",\"size\":"<<p.size<<",\"period\":"<<p.period
-              <<",\"outstanding\":"<<p.outstanding<<",\"planes\":"<<p.planes<<",\"replay\":"<<(p.replay?"true":"false")
+              <<",\"outstanding\":"<<p.outstanding<<",\"burst_beats\":"<<p.burst_beats<<",\"planes\":"<<p.planes<<",\"replay\":"<<(p.replay?"true":"false")
               <<",\"stalls\":"<<(p.stalls?"true":"false")<<",\"memsim_slots\":"<<p.memsim_slots<<"}}\n";config.close();
         storage_axi::Demo demo("storage",p);
         while(!demo.done() && sc_time_stamp().value()<p.max_ticks)
